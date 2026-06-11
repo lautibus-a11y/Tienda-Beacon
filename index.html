@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Beacon | Experiencia Inmersiva</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FFD400',
+                        secondary: '#FFC107',
+                        dark: '#030303',
+                        surface: 'rgba(255, 255, 255, 0.03)',
+                        surfaceHover: 'rgba(255, 255, 255, 0.08)',
+                        border: 'rgba(255, 255, 255, 0.08)',
+                        textSec: '#BDBDBD'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['BN Hightide', 'Outfit', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css" />
+</head>
+<body class="antialiased selection:bg-primary selection:text-black">
+
+    <!-- Aurora Background -->
+    <div class="aurora-bg">
+        <div class="aurora-blob blob-1"></div>
+        <div class="aurora-blob blob-2"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 py-4" id="navbar">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="glass px-6 py-3 flex justify-between items-center">
+                <a href="#" class="text-2xl font-display font-bold tracking-tighter flex items-center gap-2 magnetic" data-magnetic>
+                    <i data-lucide="hexagon" class="text-primary"></i>
+                    BEACON<span class="text-primary">.</span>
+                </a>
+                
+                <div class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a href="#productos" class="hover:text-primary transition-colors hover-target">Productos</a>
+                    <a href="#beneficios" class="hover:text-primary transition-colors hover-target">Beneficios</a>
+                    <a href="#metodologia" class="hover:text-primary transition-colors hover-target">Proceso</a>
+                    <a href="#contacto" class="hover:text-primary transition-colors hover-target">Contacto</a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <button id="cart-btn" class="hover-target p-2 rounded-full hover:bg-white/5 transition-colors relative">
+                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                        <span id="cart-badge" class="absolute -top-1 -right-1 bg-primary text-black text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden"></span>
+                    </button>
+                    <a href="#productos" class="hidden md:inline-flex bg-primary text-black px-5 py-2 rounded-full font-semibold text-sm hover:bg-secondary transition-colors magnetic" data-magnetic>
+                        Comprar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. Hero Cinematic Fullscreen -->
+    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden" id="hero">
+        <div class="absolute inset-0 w-full h-full" id="hero-bg">
+            <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-60 scale-105" id="hero-video">
+                <source src="assets/videos/videoherobucle.mp4" type="video/mp4">
+                <source src="https://cdn.pixabay.com/video/2021/08/11/84700-587870366_large.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto mt-20">
+            <span class="inline-block py-1 px-3 rounded-full border border-white/20 bg-white/5 backdrop-blur-md text-xs font-medium tracking-widest uppercase mb-10 reveal-up">
+                Nueva Generación 2026
+            </span>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal-up" style="animation-delay: 0.2s">
+                <a href="#productos" class="w-full sm:w-auto bg-primary text-black px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105 magnetic hover-target flex items-center justify-center" data-magnetic>
+                    Ver Catálogo
+                </a>
+                <a href="#destacados" class="w-full sm:w-auto glass px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2 hover-target">
+                    Destacados
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 hover:opacity-100 transition-opacity cursor-pointer hover-target" id="scroll-indicator" onclick="document.getElementById('destacados').scrollIntoView({behavior: 'smooth'})">
+            <span class="text-xs tracking-widest uppercase">Scroll</span>
+            <div class="w-[1px] h-12 bg-white/20 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-full bg-primary origin-top scroll-line-anim"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Infinite Glass Marquee -->
+    <section class="py-6 border-y border-white/5 bg-black/50 backdrop-blur-md overflow-hidden relative z-20">
+        <div class="marquee-container flex items-center text-sm md:text-base font-medium tracking-wide text-textSec">
+            <!-- Set 1 -->
+            <div class="flex items-center justify-around w-1/2 flex-shrink-0">
+                <span class="flex items-center gap-2"><i data-lucide="globe" class="w-4 h-4 text-primary"></i> Envíos Globales</span>
+                <span class="flex items-center gap-2"><i data-lucide="shield-check" class="w-4 h-4 text-primary"></i> Garantía Extendida</span>
+                <span class="flex items-center gap-2"><i data-lucide="headphones" class="w-4 h-4 text-primary"></i> Soporte 24/7</span>
+                <span class="flex items-center gap-2"><i data-lucide="award" class="w-4 h-4 text-primary"></i> Calidad Premium</span>
+                <span class="flex items-center gap-2"><i data-lucide="refresh-cw" class="w-4 h-4 text-primary"></i> Devoluciones Fáciles</span>
+            </div>
+            <!-- Set 2 (Clone) -->
+            <div class="flex items-center justify-around w-1/2 flex-shrink-0">
+                <span class="flex items-center gap-2"><i data-lucide="globe" class="w-4 h-4 text-primary"></i> Envíos Globales</span>
+                <span class="flex items-center gap-2"><i data-lucide="shield-check" class="w-4 h-4 text-primary"></i> Garantía Extendida</span>
+                <span class="flex items-center gap-2"><i data-lucide="headphones" class="w-4 h-4 text-primary"></i> Soporte 24/7</span>
+                <span class="flex items-center gap-2"><i data-lucide="award" class="w-4 h-4 text-primary"></i> Calidad Premium</span>
+                <span class="flex items-center gap-2"><i data-lucide="refresh-cw" class="w-4 h-4 text-primary"></i> Devoluciones Fáciles</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Productos Destacados (Infinite Gallery) -->
+    <section class="py-24 relative z-10 overflow-hidden" id="destacados">
+        <div class="max-w-7xl mx-auto px-6 mb-12 flex justify-between items-end section-header">
+            <div>
+                <h2 class="text-3xl md:text-5xl font-display font-bold mb-4">Destacados</h2>
+                <p class="text-textSec text-lg">La cúspide de la ingeniería y el diseño.</p>
+            </div>
+        </div>
+
+        <div class="w-full overflow-visible">
+            <div class="swiper products-slider !overflow-visible">
+                <div class="swiper-wrapper swiper-linear-wrapper">
+                    <!-- Dynamically populated from products.js -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Catálogo Completo (Glass Tabs) -->
+    <section class="py-24 relative z-10" id="productos">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-display font-bold mb-6">Catálogo Completo</h2>
+                
+                <!-- Glass Tabs -->
+                <div class="inline-flex glass p-1 rounded-full relative overflow-x-auto hide-scroll max-w-full">
+                    <div class="absolute left-1 top-1 bottom-1 bg-white/10 rounded-full transition-all duration-300 z-0" id="tab-indicator" style="width: 100px;"></div>
+                    <button class="tab-btn relative z-10 px-6 py-2 text-sm font-medium hover-target active-tab" data-filter="all">Todos</button>
+                    <button class="tab-btn relative z-10 px-6 py-2 text-sm font-medium text-textSec hover-target" data-filter="audio">Audio</button>
+                    <button class="tab-btn relative z-10 px-6 py-2 text-sm font-medium text-textSec hover-target" data-filter="wearables">Wearables</button>
+                    <button class="tab-btn relative z-10 px-6 py-2 text-sm font-medium text-textSec hover-target" data-filter="vision">Visión</button>
+                </div>
+            </div>
+
+            <!-- Grid Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 catalog-grid">
+                <!-- Dynamically populated from products.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Metodología de Compra (Interactive Timeline Mobile First) -->
+    <section class="py-24 relative z-10" id="metodologia">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-display font-bold mb-4">Metodología de Compra</h2>
+                <p class="text-textSec text-lg">Un proceso rápido, transparente y 100% digital.</p>
+            </div>
+
+            <div class="relative">
+                <!-- Linea base -->
+                <div class="absolute left-[20px] md:left-[28px] top-4 bottom-4 w-[2px] bg-white/10 rounded-full">
+                    <div class="timeline-progress absolute top-0 left-0 w-full bg-primary shadow-[0_0_15px_rgba(255,212,0,0.5)] rounded-full" id="timeline-progress"></div>
+                </div>
+
+                <div class="space-y-10">
+                    <!-- Step 1 -->
+                    <div class="relative pl-14 md:pl-24 timeline-step group">
+                        <div class="absolute left-[11px] md:left-[19px] top-8 w-5 h-5 rounded-full bg-black border-2 border-white/20 z-10 step-dot transition-colors duration-500 transform -translate-x-1/2 flex items-center justify-center">
+                            <div class="w-2 h-2 rounded-full bg-primary opacity-0 dot-inner transition-opacity duration-300"></div>
+                        </div>
+                        <div class="glass-panel p-5 rounded-2xl md:rounded-[24px] transform transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(255,212,0,0.1)] border border-transparent hover:border-primary/20">
+                            <div class="w-full h-32 md:h-48 rounded-xl bg-white/5 mb-5 relative overflow-hidden group-hover:bg-white/10 transition-colors">
+                                <img src="assets/images/steps/paso1.webp" alt="Agregar productos" class="w-full h-full object-cover object-center opacity-80 group-hover:opacity-100 transition-opacity">
+                            </div>
+                            <h3 class="text-lg md:text-xl font-display font-bold text-primary mb-2">01. Agregá tus productos al carrito</h3>
+                            <p class="text-sm text-textSec leading-relaxed">Explorá nuestro catálogo y seleccioná los productos que necesitás de forma rápida y sencilla.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="relative pl-14 md:pl-24 timeline-step group">
+                        <div class="absolute left-[11px] md:left-[19px] top-8 w-5 h-5 rounded-full bg-black border-2 border-white/20 z-10 step-dot transition-colors duration-500 transform -translate-x-1/2 flex items-center justify-center">
+                            <div class="w-2 h-2 rounded-full bg-primary opacity-0 dot-inner transition-opacity duration-300"></div>
+                        </div>
+                        <div class="glass-panel p-5 rounded-2xl md:rounded-[24px] transform transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(255,212,0,0.1)] border border-transparent hover:border-primary/20">
+                            <div class="w-full h-32 md:h-48 rounded-xl bg-white/5 mb-5 relative overflow-hidden group-hover:bg-white/10 transition-colors">
+                                <img src="assets/images/steps/paso2.webp" alt="Enviá tu pedido por WhatsApp" class="w-full h-full object-cover object-center opacity-80 group-hover:opacity-100 transition-opacity">
+                            </div>
+                            <h3 class="text-lg md:text-xl font-display font-bold text-primary mb-2">02. Enviá tu pedido por WhatsApp</h3>
+                            <p class="text-sm text-textSec leading-relaxed">Confirmá tu selección enviando el pedido directamente por WhatsApp para recibir atención personalizada.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="relative pl-14 md:pl-24 timeline-step group">
+                        <div class="absolute left-[11px] md:left-[19px] top-8 w-5 h-5 rounded-full bg-black border-2 border-white/20 z-10 step-dot transition-colors duration-500 transform -translate-x-1/2 flex items-center justify-center">
+                            <div class="w-2 h-2 rounded-full bg-primary opacity-0 dot-inner transition-opacity duration-300"></div>
+                        </div>
+                        <div class="glass-panel p-5 rounded-2xl md:rounded-[24px] transform transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(255,212,0,0.1)] border border-transparent hover:border-primary/20">
+                            <div class="w-full h-32 md:h-48 rounded-xl bg-white/5 mb-5 relative overflow-hidden group-hover:bg-white/10 transition-colors">
+                                <img src="assets/images/steps/paso3.webp" alt="Recibí tu pedido sin costo" class="w-full h-full object-cover object-center opacity-80 group-hover:opacity-100 transition-opacity">
+                            </div>
+                            <h3 class="text-lg md:text-xl font-display font-bold text-primary mb-2">03. Recibí tu pedido sin costo</h3>
+                            <p class="text-sm text-textSec leading-relaxed">Nos encargamos de la entrega para que recibas tu compra de manera rápida, cómoda y totalmente gratuita.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4 -->
+                    <div class="relative pl-14 md:pl-24 timeline-step group">
+                        <div class="absolute left-[11px] md:left-[19px] top-8 w-5 h-5 rounded-full bg-black border-2 border-white/20 z-10 step-dot transition-colors duration-500 transform -translate-x-1/2 flex items-center justify-center">
+                            <div class="w-2 h-2 rounded-full bg-primary opacity-0 dot-inner transition-opacity duration-300"></div>
+                        </div>
+                        <div class="glass-panel p-5 rounded-2xl md:rounded-[24px] transform transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(255,212,0,0.1)] border border-transparent hover:border-primary/20">
+                            <div class="w-full h-32 md:h-48 rounded-xl bg-white/5 mb-5 relative overflow-hidden group-hover:bg-white/10 transition-colors">
+                                <img src="assets/images/steps/paso4.webp" alt="Disfrutá tus productos" class="w-full h-full object-cover object-center opacity-80 group-hover:opacity-100 transition-opacity">
+                            </div>
+                            <h3 class="text-lg md:text-xl font-display font-bold text-primary mb-2">04. Disfrutá tus productos</h3>
+                            <p class="text-sm text-textSec leading-relaxed">Recibí tu pedido y comenzá a disfrutarlo con la tranquilidad de haber comprado de forma simple y segura.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Métricas de Confianza (Interactive Pie Charts) -->
+    <section class="py-24 relative z-10 bg-white/[0.02] border-y border-white/5" id="beneficios">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-display font-bold mb-4">Métricas de Confianza</h2>
+                <p class="text-textSec text-lg">Resultados reales que respaldan nuestra excelencia en servicio.</p>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <!-- Chart 1 -->
+                <div class="glass-panel p-6 md:p-8 rounded-[24px] flex flex-col items-center text-center group hover:-translate-y-2 transition-transform duration-300 hover:shadow-[0_8px_30px_rgba(255,212,0,0.05)]">
+                    <div class="relative w-24 h-24 md:w-32 md:h-32 mb-6">
+                        <svg class="w-full h-full transform -rotate-90 drop-shadow-[0_0_10px_rgba(255,212,0,0.2)]" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="6"></circle>
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--primary)" stroke-width="6" stroke-dasharray="283" stroke-dashoffset="283" class="pie-progress" data-percent="98" stroke-linecap="round"></circle>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-2xl md:text-4xl font-display font-bold text-white"><span class="counter" data-target="98">0</span>%</span>
+                        </div>
+                    </div>
+                    <h4 class="text-xs md:text-sm font-medium uppercase tracking-wider text-textSec group-hover:text-primary transition-colors">Clientes Satisfechos</h4>
+                </div>
+
+                <!-- Chart 2 -->
+                <div class="glass-panel p-6 md:p-8 rounded-[24px] flex flex-col items-center text-center group hover:-translate-y-2 transition-transform duration-300 hover:shadow-[0_8px_30px_rgba(255,212,0,0.05)]">
+                    <div class="relative w-24 h-24 md:w-32 md:h-32 mb-6">
+                        <svg class="w-full h-full transform -rotate-90 drop-shadow-[0_0_10px_rgba(255,212,0,0.2)]" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="6"></circle>
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--primary)" stroke-width="6" stroke-dasharray="283" stroke-dashoffset="283" class="pie-progress" data-percent="95" stroke-linecap="round"></circle>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-2xl md:text-4xl font-display font-bold text-white"><span class="counter" data-target="95">0</span>%</span>
+                        </div>
+                    </div>
+                    <h4 class="text-xs md:text-sm font-medium uppercase tracking-wider text-textSec group-hover:text-primary transition-colors">Entregas en Tiempo</h4>
+                </div>
+
+                <!-- Chart 3 -->
+                <div class="glass-panel p-6 md:p-8 rounded-[24px] flex flex-col items-center text-center group hover:-translate-y-2 transition-transform duration-300 hover:shadow-[0_8px_30px_rgba(255,212,0,0.05)]">
+                    <div class="relative w-24 h-24 md:w-32 md:h-32 mb-6">
+                        <svg class="w-full h-full transform -rotate-90 drop-shadow-[0_0_10px_rgba(255,212,0,0.2)]" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="6"></circle>
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--primary)" stroke-width="6" stroke-dasharray="283" stroke-dashoffset="283" class="pie-progress" data-percent="100" stroke-linecap="round"></circle>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-2xl md:text-4xl font-display font-bold text-white"><span class="counter" data-target="100">0</span>%</span>
+                        </div>
+                    </div>
+                    <h4 class="text-xs md:text-sm font-medium uppercase tracking-wider text-textSec group-hover:text-primary transition-colors">Atención Personalizada</h4>
+                </div>
+
+                <!-- Chart 4 -->
+                <div class="glass-panel p-6 md:p-8 rounded-[24px] flex flex-col items-center text-center group hover:-translate-y-2 transition-transform duration-300 hover:shadow-[0_8px_30px_rgba(255,212,0,0.05)]">
+                    <div class="relative w-24 h-24 md:w-32 md:h-32 mb-6">
+                        <svg class="w-full h-full transform -rotate-90 drop-shadow-[0_0_10px_rgba(255,212,0,0.2)]" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="6"></circle>
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--primary)" stroke-width="6" stroke-dasharray="283" stroke-dashoffset="283" class="pie-progress" data-percent="92" stroke-linecap="round"></circle>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-2xl md:text-4xl font-display font-bold text-white"><span class="counter" data-target="92">0</span>%</span>
+                        </div>
+                    </div>
+                    <h4 class="text-xs md:text-sm font-medium uppercase tracking-wider text-textSec group-hover:text-primary transition-colors">Clientes Recurrentes</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Testimonios (Glass Slider) -->
+    <section class="py-24 relative z-10 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 mb-16 text-center">
+            <h2 class="text-3xl md:text-5xl font-display font-bold mb-4">Lo que dicen de nosotros</h2>
+        </div>
+
+        <div class="swiper testimonial-slider pb-12 w-full !max-w-none px-4 md:px-12">
+            <div class="swiper-wrapper swiper-linear-wrapper">
+                <!-- Testimonial 1 -->
+                <div class="swiper-slide">
+                    <div class="glass-panel p-8 rounded-3xl opacity-50 transition-opacity duration-300 transform scale-90 testimonial-card">
+                        <div class="flex gap-1 text-primary mb-6">
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                        </div>
+                        <p class="text-lg md:text-xl font-medium mb-8">"La experiencia de unboxing y la calidad del Nexus Void Pro superaron todo lo que había probado antes. El audio espacial es de otro planeta."</p>
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop" class="w-12 h-12 rounded-full object-cover" alt="Elena R.">
+                            <div>
+                                <h5 class="font-bold">Elena R.</h5>
+                                <p class="text-xs text-textSec">Productora Musical</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="swiper-slide">
+                    <div class="glass-panel p-8 rounded-3xl opacity-50 transition-opacity duration-300 transform scale-90 testimonial-card">
+                        <div class="flex gap-1 text-primary mb-6">
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                        </div>
+                        <p class="text-lg md:text-xl font-medium mb-8">"El Quantum Chrono no es solo un smartwatch, es una obra de arte en titanio. El monitoreo es extremadamente preciso."</p>
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop" class="w-12 h-12 rounded-full object-cover" alt="Marcos T.">
+                            <div>
+                                <h5 class="font-bold">Marcos T.</h5>
+                                <p class="text-xs text-textSec">Atleta Profesional</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="swiper-slide">
+                    <div class="glass-panel p-8 rounded-3xl opacity-50 transition-opacity duration-300 transform scale-90 testimonial-card">
+                        <div class="flex gap-1 text-primary mb-6">
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                        </div>
+                        <p class="text-lg md:text-xl font-medium mb-8">"Comprar en esta plataforma fue una experiencia en sí misma. La atención al detalle desde la web hasta la entrega es inigualable."</p>
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop" class="w-12 h-12 rounded-full object-cover" alt="Sofía L.">
+                            <div>
+                                <h5 class="font-bold">Sofía L.</h5>
+                                <p class="text-xs text-textSec">Tech Reviewer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 4 (Duplicate of 1) -->
+                <div class="swiper-slide">
+                    <div class="glass-panel p-8 rounded-3xl opacity-50 transition-opacity duration-300 transform scale-90 testimonial-card">
+                        <div class="flex gap-1 text-primary mb-6">
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                        </div>
+                        <p class="text-lg md:text-xl font-medium mb-8">"La experiencia de unboxing y la calidad del Nexus Void Pro superaron todo lo que había probado antes. El audio espacial es de otro planeta."</p>
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop" class="w-12 h-12 rounded-full object-cover" alt="Elena R.">
+                            <div>
+                                <h5 class="font-bold">Elena R.</h5>
+                                <p class="text-xs text-textSec">Productora Musical</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 5 (Duplicate of 2) -->
+                <div class="swiper-slide">
+                    <div class="glass-panel p-8 rounded-3xl opacity-50 transition-opacity duration-300 transform scale-90 testimonial-card">
+                        <div class="flex gap-1 text-primary mb-6">
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                        </div>
+                        <p class="text-lg md:text-xl font-medium mb-8">"El Quantum Chrono no es solo un smartwatch, es una obra de arte en titanio. El monitoreo es extremadamente preciso."</p>
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop" class="w-12 h-12 rounded-full object-cover" alt="Marcos T.">
+                            <div>
+                                <h5 class="font-bold">Marcos T.</h5>
+                                <p class="text-xs text-textSec">Atleta Profesional</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 6 (Duplicate of 3) -->
+                <div class="swiper-slide">
+                    <div class="glass-panel p-8 rounded-3xl opacity-50 transition-opacity duration-300 transform scale-90 testimonial-card">
+                        <div class="flex gap-1 text-primary mb-6">
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                        </div>
+                        <p class="text-lg md:text-xl font-medium mb-8">"Comprar en esta plataforma fue una experiencia en sí misma. La atención al detalle desde la web hasta la entrega es inigualable."</p>
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop" class="w-12 h-12 rounded-full object-cover" alt="Sofía L.">
+                            <div>
+                                <h5 class="font-bold">Sofía L.</h5>
+                                <p class="text-xs text-textSec">Tech Reviewer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination !-bottom-2"></div>
+        </div>
+    </section>
+
+    <!-- 8. CTA Premium (Section Overlap) -->
+    <section class="section-overlap bg-dark py-32 relative z-20 overflow-hidden border-t border-white/10 rounded-t-[40px]" id="cta-section">
+        <!-- Background Video -->
+        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none" id="cta-video">
+            <source src="assets/videos/videocrlbucle.mp4" type="video/mp4">
+        </video>
+        <!-- Glow orb behind -->
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] pointer-events-none"></div>
+        
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-4xl md:text-7xl font-display font-bold mb-6 split-text">
+                Elevá tu <br/> Estándar.
+            </h2>
+            <p class="text-xl text-textSec mb-10 max-w-2xl mx-auto reveal-up">
+                Unite a la élite de usuarios que ya experimentan el futuro de la tecnología personal. Stock limitado.
+            </p>
+            <div class="reveal-up">
+                <a href="#productos" class="bg-primary text-black px-10 py-5 rounded-full font-bold text-xl hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105 shadow-[0_0_40px_rgba(255,212,0,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.4)] magnetic hover-target inline-block" data-magnetic>
+                    Acceso Exclusivo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8.5 Ubicación y Contacto -->
+    <section class="py-24 relative z-20 bg-black/80 backdrop-blur-lg border-y border-white/5" id="contacto">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-display font-bold mb-4">Ubicación y Contacto</h2>
+                <p class="text-textSec text-lg">Estamos aquí para brindarte asistencia personalizada.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Información de Contacto -->
+                <div class="glass-panel p-8 rounded-3xl flex flex-col justify-center">
+                    <div class="space-y-8">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 text-primary">
+                                <i data-lucide="map-pin"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-display font-bold mb-1">Nuestra Sede</h4>
+                                <p class="text-textSec text-sm">Av. del Libertador 1234, Piso 5<br>C1425 CABA, Argentina</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 text-primary">
+                                <i data-lucide="clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-display font-bold mb-1">Horarios de Atención</h4>
+                                <p class="text-textSec text-sm">Lunes a Viernes: 09:00 - 18:00<br>Sábados: 10:00 - 14:00</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 text-primary">
+                                <i data-lucide="phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-display font-bold mb-1">Línea Directa VIP</h4>
+                                <p class="text-textSec text-sm">+54 11 4555-9999<br>0800-BEACON-VIP</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 text-primary">
+                                <i data-lucide="mail"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-display font-bold mb-1">Correo Electrónico</h4>
+                                <p class="text-textSec text-sm">concierge@beacon.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 pt-8 border-t border-white/10 flex gap-4">
+                        <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-black transition-colors hover-target"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        <a href="https://linkedin.com" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-black transition-colors hover-target"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                        <a href="https://x.com" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-black transition-colors hover-target"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                    </div>
+                </div>
+
+                <!-- Google Maps Embed -->
+                <div class="glass-panel p-2 rounded-3xl h-[400px] lg:h-auto overflow-hidden relative group">
+                    <div class="absolute inset-0 pointer-events-none group-hover:pointer-events-auto z-10"></div>
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.016713578103!2d-58.3815704!3d-34.6037389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccacfcebc1581%3A0x4cdfaa2ef819385a!2sObelisco!5e0!3m2!1ses!2sar!4v1700000000000!5m2!1ses!2sar" 
+                        class="w-full h-full rounded-[24px] filter grayscale opacity-70 transition-all duration-500 hover:grayscale-0 hover:opacity-100" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Footer Premium -->
+    <footer class="bg-black pt-20 pb-10 border-t border-white/5 relative z-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="md:col-span-1">
+                    <a href="#" class="text-2xl font-display font-bold tracking-tighter flex items-center gap-2 mb-6">
+                        <i data-lucide="hexagon" class="text-primary"></i>
+                        BEACON<span class="text-primary">.</span>
+                    </a>
+                    <p class="text-textSec text-sm">Ingeniería premium para una nueva era de interacción digital.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-6 uppercase tracking-wider text-sm">Productos</h4>
+                    <ul class="space-y-4 text-sm text-textSec">
+                        <li><a href="#productos" class="hover:text-primary transition-colors hover-target">Audio Spatial</a></li>
+                        <li><a href="#productos" class="hover:text-primary transition-colors hover-target">Wearables</a></li>
+                        <li><a href="#productos" class="hover:text-primary transition-colors hover-target">Visión Holográfica</a></li>
+                        <li><a href="#productos" class="hover:text-primary transition-colors hover-target">Hogar Inteligente</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-6 uppercase tracking-wider text-sm">Soporte</h4>
+                    <ul class="space-y-4 text-sm text-textSec">
+                        <li><a href="#contacto" class="hover:text-primary transition-colors hover-target">Centro de Ayuda</a></li>
+                        <li><a href="#beneficios" class="hover:text-primary transition-colors hover-target">Garantía Elite</a></li>
+                        <li><a href="#metodologia" class="hover:text-primary transition-colors hover-target">Envíos y Devoluciones</a></li>
+                        <li><a href="#contacto" class="hover:text-primary transition-colors hover-target">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-6 uppercase tracking-wider text-sm">Newsletter</h4>
+                    <p class="text-sm text-textSec mb-4">Recibí invitaciones a lanzamientos privados.</p>
+                    <div class="flex gap-2">
+                        <input type="email" placeholder="Tu email" class="bg-white/5 border border-white/10 rounded-full px-4 py-2 w-full text-sm focus:outline-none focus:border-primary transition-colors">
+                        <button class="bg-primary text-black w-10 h-10 rounded-full flex items-center justify-center hover:bg-white transition-colors hover-target flex-shrink-0">
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/10 text-xs text-textSec">
+                <p>&copy; 2026 BEACON. Todos los derechos reservados.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="https://instagram.com" target="_blank" class="hover:text-primary transition-colors hover-target"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                    <a href="https://x.com" target="_blank" class="hover:text-primary transition-colors hover-target"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                    <a href="https://youtube.com" target="_blank" class="hover:text-primary transition-colors hover-target"><i data-lucide="youtube" class="w-4 h-4"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SHOPPING CART DRAWER -->
+    <div id="cart-overlay" class="cart-overlay"></div>
+    <div id="cart-drawer" class="cart-drawer">
+        <!-- Header -->
+        <div class="flex items-center justify-between p-6 border-b border-white/10">
+            <h3 class="text-xl font-display font-bold text-white flex items-center gap-2">
+                <i data-lucide="shopping-bag" class="text-primary w-5 h-5"></i> Carrito de Compras
+            </h3>
+            <button id="cart-close-btn" class="text-white/60 hover:text-white transition-colors p-2 hover:bg-white/5 rounded-full">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+        
+        <!-- Items Container -->
+        <div id="cart-items" class="flex-grow overflow-y-auto p-6 space-y-4 custom-scroll">
+            <!-- Dynamically populated by cart.js -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="cart-empty-state" class="flex-grow flex flex-col items-center justify-center p-6 text-center">
+            <i data-lucide="shopping-bag" class="w-16 h-16 text-white/10 mb-4"></i>
+            <h4 class="text-lg font-bold text-white mb-2">Tu carrito está vacío</h4>
+            <p class="text-textSec text-sm max-w-[260px] mx-auto leading-relaxed">
+                Explorá nuestro catálogo de tecnología premium y agregá tus productos preferidos.
+            </p>
+        </div>
+
+        <!-- Checkout Summary -->
+        <div id="cart-checkout-wrapper" class="p-6 border-t border-white/10 bg-black/40">
+            <div class="flex justify-between items-center mb-6">
+                <span class="text-textSec text-sm">Subtotal estimado</span>
+                <span id="cart-subtotal" class="text-2xl font-display font-bold text-white">$0</span>
+            </div>
+            <button id="cart-checkout-btn" class="w-full bg-primary text-black py-4 rounded-xl font-semibold text-base hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(255,212,0,0.2)]">
+                Confirmar por WhatsApp <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </button>
+            <p class="text-[10px] text-center text-textSec mt-4 leading-normal">
+                Envíos gratuitos a todo el país. Coordiná la forma de pago y entrega de manera directa e inmediata con un asistente VIP.
+            </p>
+        </div>
+    </div>
+
+    <!-- FLOATING CART BAR -->
+    <div id="floating-cart" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40 bg-black/80 backdrop-blur-xl border border-white/10 rounded-full px-6 py-3.5 shadow-[0_10px_35px_rgba(0,0,0,0.6)] flex items-center justify-between gap-6 pointer-events-none opacity-0 translate-y-10 transition-all duration-500 max-w-[90vw] md:max-w-md w-full">
+        <div class="flex items-center gap-3">
+            <div class="relative">
+                <div class="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                </div>
+                <span id="floating-cart-count" class="absolute -top-1 -right-1 bg-primary text-black text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+            </div>
+            <div>
+                <p class="text-[10px] text-textSec uppercase tracking-wider font-semibold">Tu Carrito</p>
+                <p id="floating-cart-total" class="text-sm font-bold text-white">$0</p>
+            </div>
+        </div>
+        <button id="floating-cart-view-btn" class="pointer-events-auto bg-primary text-black hover:bg-white hover:text-black text-xs font-bold px-5 py-2.5 rounded-full transition-all duration-300 flex items-center gap-1.5 shadow-[0_0_15px_rgba(255,212,0,0.15)]">
+            Ver Carrito <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </button>
+    </div>
+
+    <!-- PRODUCT DETAIL MODAL -->
+    <div id="product-modal" class="fixed inset-0 z-[150] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <!-- Modal Backdrop -->
+        <div id="product-modal-backdrop" class="absolute inset-0 bg-black/80 backdrop-blur-md"></div>
+        
+        <!-- Modal Box -->
+        <div class="relative w-full max-w-2xl bg-dark border border-white/10 rounded-[32px] overflow-hidden glass-panel flex flex-col md:flex-row z-10 transform scale-95 transition-all duration-300">
+            <!-- Close Button -->
+            <button id="product-modal-close" class="absolute top-4 right-4 text-white/60 hover:text-white p-2 hover:bg-white/5 rounded-full z-20 transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            
+            <!-- Image Column -->
+            <div class="w-full md:w-1/2 h-64 md:h-auto bg-white/5 relative overflow-hidden flex-shrink-0">
+                <img id="modal-product-img" src="" alt="" class="w-full h-full object-cover">
+            </div>
+            
+            <!-- Details Column -->
+            <div class="w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-between">
+                <div>
+                    <span id="modal-product-badge" class="inline-block bg-primary text-black text-[10px] font-bold px-3 py-1 rounded-full mb-3 uppercase tracking-wider hidden">NUEVO</span>
+                    <span id="modal-product-subtitle" class="text-xs text-primary font-semibold tracking-wider uppercase block mb-1"></span>
+                    <h3 id="modal-product-name" class="text-2xl font-display font-bold text-white leading-tight mb-3"></h3>
+                    <p id="modal-product-desc" class="text-textSec text-sm leading-relaxed mb-6"></p>
+                </div>
+                
+                <div class="space-y-6">
+                    <!-- Price and Qty Selector -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-textSec uppercase tracking-wider">Precio Unitario</span>
+                            <span id="modal-product-price" class="text-2xl font-display font-bold text-white"></span>
+                        </div>
+                        
+                        <!-- Quantity Selector -->
+                        <div class="flex items-center gap-3 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">
+                            <button id="modal-dec-qty" class="text-white hover:text-primary transition-colors p-1">
+                                <i data-lucide="minus" class="w-4 h-4"></i>
+                            </button>
+                            <span id="modal-qty-val" class="text-sm font-semibold w-6 text-center text-white">1</span>
+                            <button id="modal-inc-qty" class="text-white hover:text-primary transition-colors p-1">
+                                <i data-lucide="plus" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Add to Cart Button -->
+                    <button id="modal-add-btn" class="w-full bg-primary text-black py-4 rounded-xl font-semibold text-base hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(255,212,0,0.2)]">
+                        <i data-lucide="shopping-bag" class="w-5 h-5"></i> Agregar al Carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- SplitType (Open Source alternative to SplitText) -->
+    <script src="https://unpkg.com/split-type"></script>
+    <!-- Lenis for Smooth Scroll -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <!-- Swiper -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Scripts -->
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
