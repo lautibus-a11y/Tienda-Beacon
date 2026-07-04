@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         smooth: true,
         mouseMultiplier: 1,
         smoothTouch: false,
-        touchMultiplier: 2,
+        touchMultiplier: 1.2,
         infinite: false,
     });
 

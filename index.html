@@ -41,6 +41,9 @@
         }
     </script>
 
+    <!-- Preloads -->
+    <link rel="preload" as="video" href="assets/videos/videoherobucle.mp4" type="video/mp4">
+
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
@@ -85,7 +88,7 @@
     <!-- 1. Hero Cinematic Fullscreen -->
     <section class="relative h-screen w-full flex items-end pb-[20vh] md:pb-0 md:items-center justify-center overflow-hidden" id="hero">
         <div class="absolute inset-0 w-full h-full" id="hero-bg">
-            <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-90 scale-105" id="hero-video">
+            <video autoplay loop muted playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover opacity-90 scale-105" id="hero-video">
                 <source src="assets/videos/videoherobucle.mp4" type="video/mp4">
             </video>
             <div class="absolute inset-0 hero-overlay"></div>
@@ -331,7 +334,7 @@
 
         <!-- ═══ NUESTRA HISTORIA ═══ -->
         <section id="nuestra-historia" class="w-full flex flex-col justify-center py-10 md:py-0"
-            style="position: sticky; top: 0; height: 100svh; min-height: 600px; z-index: 2; background-color: #F9F3E9; box-shadow: 0 -20px 50px -10px rgba(0,0,0,0.3);">
+            style="position: sticky; top: 0; height: 100svh; min-height: 600px; z-index: 2; background-color: #F9F3E9; box-shadow: 0 -20px 50px -10px rgba(0,0,0,0.3); transform: translateZ(0); -webkit-transform: translateZ(0); will-change: transform;">
             <div class="mx-auto max-w-6xl px-6 w-full" id="about-reveal-card">
                 <div class="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-14 items-center">
                     <div>
