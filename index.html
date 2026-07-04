@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Beacon | Experiencia Inmersiva</title>
+    <title>Beacon | Sublimación & Diseño</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,13 +18,15 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#FFD400',
-                        secondary: '#FFC107',
-                        dark: '#030303',
-                        surface: 'rgba(255, 255, 255, 0.03)',
-                        surfaceHover: 'rgba(255, 255, 255, 0.08)',
-                        border: 'rgba(255, 255, 255, 0.08)',
-                        textSec: '#BDBDBD'
+                        primary: '#FF5C2D',
+                        secondary: '#FF5C2D',
+                        background: '#F9F3E9',
+                        tertiary: '#F9F9F7',
+                        dark: '#2C2C2C',
+                        surface: '#F9F9F7',
+                        surfaceHover: 'rgba(255, 92, 45, 0.08)',
+                        border: 'rgba(0, 0, 0, 0.08)',
+                        textSec: '#6B6560'
                     },
                     fontFamily: {
                         sans: ['Plus Jakarta Sans', 'sans-serif'],
@@ -44,7 +46,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css" />
 </head>
-<body class="antialiased selection:bg-primary selection:text-black">
+<body class="antialiased bg-[#F9F3E9] selection:bg-primary selection:text-white">
 
     <!-- Aurora Background -->
     <div class="aurora-bg">
@@ -52,97 +54,211 @@
         <div class="aurora-blob blob-2"></div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 top-0 transition-all duration-300 py-4" id="navbar">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="glass px-6 py-3 flex justify-between items-center">
-                <a href="#" class="text-2xl font-display font-bold tracking-tighter flex items-center gap-2 magnetic" data-magnetic>
-                    <i data-lucide="hexagon" class="text-primary"></i>
-                    BEACON<span class="text-primary">.</span>
-                </a>
-                
-                <div class="hidden md:flex space-x-8 text-sm font-medium">
-                    <a href="#productos" class="hover:text-primary transition-colors hover-target">Productos</a>
-                    <a href="#beneficios" class="hover:text-primary transition-colors hover-target">Beneficios</a>
-                    <a href="#metodologia" class="hover:text-primary transition-colors hover-target">Proceso</a>
-                    <a href="#contacto" class="hover:text-primary transition-colors hover-target">Contacto</a>
-                </div>
+    <!-- Navigation (Full-width Glassmorphism Header) -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 py-3 md:py-5 bg-transparent border-b border-transparent" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="#" class="text-2xl font-display font-bold tracking-tighter flex items-center gap-2 magnetic text-white transition-colors duration-300" id="nav-logo" data-magnetic>
+                <i data-lucide="hexagon" class="text-primary"></i>
+                BEACON<span class="text-primary">.</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-white/80 transition-colors duration-300" id="nav-links">
+                <a href="#servicios" class="hover:text-primary transition-colors hover-target">Servicios</a>
+                <a href="#productos" class="hover:text-primary transition-colors hover-target">Productos</a>
+                <a href="#nosotros" class="hover:text-primary transition-colors hover-target">Nosotros</a>
+                <a href="#contacto" class="hover:text-primary transition-colors hover-target">Contacto</a>
+            </div>
 
-                <div class="flex items-center gap-4">
-                    <button id="cart-btn" class="hover-target p-2 rounded-full hover:bg-white/5 transition-colors relative">
-                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                        <span id="cart-badge" class="absolute -top-1 -right-1 bg-primary text-black text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden"></span>
-                    </button>
-                    <a href="#productos" class="hidden md:inline-flex bg-primary text-black px-5 py-2 rounded-full font-semibold text-sm hover:bg-secondary transition-colors magnetic" data-magnetic>
-                        Comprar
-                    </a>
-                </div>
+            <div class="flex items-center gap-4 text-white transition-colors duration-300" id="nav-actions">
+                <button id="cart-btn" class="hover-target p-2 rounded-full hover:bg-white/10 transition-colors relative">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-primary text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden"></span>
+                </button>
+                <a href="#productos" class="hidden md:inline-flex bg-primary text-white px-5 py-2 rounded-full font-semibold text-sm hover:bg-secondary transition-colors magnetic" data-magnetic>
+                    Cotizar
+                </a>
             </div>
         </div>
     </nav>
 
     <!-- 1. Hero Cinematic Fullscreen -->
-    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden" id="hero">
+    <section class="relative h-screen w-full flex items-end pb-[20vh] md:pb-0 md:items-center justify-center overflow-hidden" id="hero">
         <div class="absolute inset-0 w-full h-full" id="hero-bg">
-            <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-60 scale-105" id="hero-video">
+            <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-90 scale-105" id="hero-video">
                 <source src="assets/videos/videoherobucle.mp4" type="video/mp4">
-                <source src="https://cdn.pixabay.com/video/2021/08/11/84700-587870366_large.mp4" type="video/mp4">
             </video>
             <div class="absolute inset-0 hero-overlay"></div>
         </div>
 
-        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto mt-20">
-            <span class="inline-block py-1 px-3 rounded-full border border-white/20 bg-white/5 backdrop-blur-md text-xs font-medium tracking-widest uppercase mb-10 reveal-up">
-                Nueva Generación 2026
-            </span>
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto md:mt-20 w-full">
+            <!-- Transparent Autoplay Mini-Marquee Capsule -->
+            <div class="inline-flex items-center overflow-hidden py-2 px-5 rounded-full bg-transparent text-xs font-semibold tracking-widest uppercase mb-10 max-w-[260px] sm:max-w-xs md:max-w-md reveal-up relative" style="mask-image: linear-gradient(to right, transparent, white 15%, white 85%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, white 15%, white 85%, transparent);">
+                <div class="flex whitespace-nowrap gap-3 animate-mini-marquee">
+                    <span class="text-white/90">Sublimación</span>
+                    <span class="text-primary font-bold">•</span>
+                    <span class="text-white/90">Diseño</span>
+                    <span class="text-primary font-bold">•</span>
+                    <span class="text-white/90">Producción</span>
+                    <span class="text-primary font-bold">•</span>
+                    <!-- Repeat for Loop -->
+                    <span class="text-white/90">Sublimación</span>
+                    <span class="text-primary font-bold">•</span>
+                    <span class="text-white/90">Diseño</span>
+                    <span class="text-primary font-bold">•</span>
+                    <span class="text-white/90">Producción</span>
+                    <span class="text-primary font-bold">•</span>
+                </div>
+            </div>
             
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal-up" style="animation-delay: 0.2s">
-                <a href="#productos" class="w-full sm:w-auto bg-primary text-black px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105 magnetic hover-target flex items-center justify-center" data-magnetic>
+                <a href="#productos" class="w-full sm:w-auto bg-primary text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-secondary transition-all duration-300 transform hover:scale-105 magnetic hover-target flex items-center justify-center" data-magnetic>
                     Ver Catálogo
                 </a>
-                <a href="#destacados" class="w-full sm:w-auto glass px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2 hover-target">
-                    Destacados
+                <a href="#servicios" class="w-full sm:w-auto bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-lg px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/20 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 hover-target">
+                    Nuestros Servicios
                 </a>
             </div>
         </div>
 
         <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 hover:opacity-100 transition-opacity cursor-pointer hover-target" id="scroll-indicator" onclick="document.getElementById('destacados').scrollIntoView({behavior: 'smooth'})">
-            <span class="text-xs tracking-widest uppercase">Scroll</span>
-            <div class="w-[1px] h-12 bg-white/20 relative overflow-hidden">
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 hover:opacity-100 transition-opacity cursor-pointer hover-target" id="scroll-indicator" onclick="document.getElementById('servicios').scrollIntoView({behavior: 'smooth'})">
+            <div class="w-[1px] h-12 bg-black/10 relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-full bg-primary origin-top scroll-line-anim"></div>
             </div>
         </div>
     </section>
 
     <!-- 2. Infinite Glass Marquee -->
-    <section class="py-6 border-y border-white/5 bg-black/50 backdrop-blur-md overflow-hidden relative z-20">
-        <div class="marquee-container flex items-center text-sm md:text-base font-medium tracking-wide text-textSec">
-            <!-- Set 1 -->
-            <div class="flex items-center justify-around w-1/2 flex-shrink-0">
-                <span class="flex items-center gap-2"><i data-lucide="globe" class="w-4 h-4 text-primary"></i> Envíos Globales</span>
-                <span class="flex items-center gap-2"><i data-lucide="shield-check" class="w-4 h-4 text-primary"></i> Garantía Extendida</span>
-                <span class="flex items-center gap-2"><i data-lucide="headphones" class="w-4 h-4 text-primary"></i> Soporte 24/7</span>
-                <span class="flex items-center gap-2"><i data-lucide="award" class="w-4 h-4 text-primary"></i> Calidad Premium</span>
-                <span class="flex items-center gap-2"><i data-lucide="refresh-cw" class="w-4 h-4 text-primary"></i> Devoluciones Fáciles</span>
+    <section class="py-6 border-y border-black/5 bg-tertiary/80 backdrop-blur-md overflow-hidden relative z-20">
+        <div class="marquee-wrapper w-full">
+            <div class="marquee-content text-sm md:text-base font-medium tracking-wide text-textSec">
+                <span class="flex items-center gap-2 flex-shrink-0"><i data-lucide="shirt" class="w-4 h-4 text-primary"></i> Sublimación Textil</span>
+                <span class="flex items-center gap-2 flex-shrink-0"><i data-lucide="palette" class="w-4 h-4 text-primary"></i> Diseño Gráfico</span>
+                <span class="flex items-center gap-2 flex-shrink-0"><i data-lucide="printer" class="w-4 h-4 text-primary"></i> Estampado DTF</span>
+                <span class="flex items-center gap-2 flex-shrink-0"><i data-lucide="sticker" class="w-4 h-4 text-primary"></i> Vinilos & Calcos</span>
+                <span class="flex items-center gap-2 flex-shrink-0"><i data-lucide="truck" class="w-4 h-4 text-primary"></i> Envíos a Todo el País</span>
             </div>
-            <!-- Set 2 (Clone) -->
-            <div class="flex items-center justify-around w-1/2 flex-shrink-0">
-                <span class="flex items-center gap-2"><i data-lucide="globe" class="w-4 h-4 text-primary"></i> Envíos Globales</span>
-                <span class="flex items-center gap-2"><i data-lucide="shield-check" class="w-4 h-4 text-primary"></i> Garantía Extendida</span>
-                <span class="flex items-center gap-2"><i data-lucide="headphones" class="w-4 h-4 text-primary"></i> Soporte 24/7</span>
-                <span class="flex items-center gap-2"><i data-lucide="award" class="w-4 h-4 text-primary"></i> Calidad Premium</span>
-                <span class="flex items-center gap-2"><i data-lucide="refresh-cw" class="w-4 h-4 text-primary"></i> Devoluciones Fáciles</span>
+            <div class="marquee-content text-sm md:text-base font-medium tracking-wide text-textSec" aria-hidden="true">
+                <span class="flex items-center gap-2 flex-shrink-0"><i data-lucide="shirt" class="w-4 h-4 text-primary"></i> Sublimación Textil</span>
+                <span class="flex items-center gap-2 flex-shrink-0"><i data-lucide="palette" class="w-4 h-4 text-primary"></i> Diseño Gráfico</span>
+                <span class="flex items-center gap-2 flex-shrink-0"><i data-lucide="printer" class="w-4 h-4 text-primary"></i> Estampado DTF</span>
+                <span class="flex items-center gap-2 flex-shrink-0"><i data-lucide="sticker" class="w-4 h-4 text-primary"></i> Vinilos & Calcos</span>
+                <span class="flex items-center gap-2 flex-shrink-0"><i data-lucide="truck" class="w-4 h-4 text-primary"></i> Envíos a Todo el País</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.5 Nuestros Servicios (Bento Grid) -->
+    <section class="py-16 md:py-24 relative z-10" id="servicios">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-display font-bold mb-4 inline-block relative" id="title-servicios">
+                    <span class="relative inline-block">
+                        Nuestros Servicios
+                        <span class="absolute left-0 -bottom-1 w-full h-[4px] bg-primary origin-left scale-x-0" id="servicios-underline"></span>
+                    </span>
+                </h2>
+                <p class="text-textSec text-lg max-w-2xl mx-auto"><span class="text-primary font-bold">Soluciones</span> integrales de sublimación, diseño gráfico y producción personalizada para marcas, eventos y emprendimientos.</p>
+            </div>
+
+            <div class="bento-grid">
+                <!-- Destacado: Sublimación Textil -->
+                <div class="bento-item bento-span-2 bento-span-2-row bg-black/40 backdrop-blur-sm border border-white/10 text-white p-6 md:p-8 rounded-[24px] md:rounded-[28px] flex flex-col justify-end hover-target spotlight-card relative overflow-hidden group">
+                    <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
+                        <img src="assets/images/steps/paso1.webp" alt="Sublimación Textil" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                    </div>
+                    <div class="spotlight-content relative z-10">
+                        <h3 class="text-2xl md:text-3xl font-display font-bold">Sublimación Textil</h3>
+                    </div>
+                </div>
+
+                <!-- Estampado DTF -->
+                <div class="bento-item bg-black/40 backdrop-blur-sm border border-white/10 text-white p-5 md:p-6 rounded-[20px] md:rounded-[24px] flex flex-col justify-end hover-target spotlight-card relative overflow-hidden group">
+                    <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
+                        <img src="assets/images/steps/paso3.webp" alt="Estampado DTF" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                    </div>
+                    <div class="spotlight-content relative z-10">
+                        <h3 class="text-lg font-display font-bold">Estampado DTF</h3>
+                    </div>
+                </div>
+
+                <!-- Diseño Gráfico -->
+                <div class="bento-item bg-black/40 backdrop-blur-sm border border-white/10 text-white p-5 md:p-6 rounded-[20px] md:rounded-[24px] flex flex-col justify-end hover-target spotlight-card relative overflow-hidden group">
+                    <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
+                        <img src="assets/images/steps/paso2.webp" alt="Diseño Gráfico" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                    </div>
+                    <div class="spotlight-content relative z-10">
+                        <h3 class="text-lg font-display font-bold">Diseño Gráfico</h3>
+                    </div>
+                </div>
+
+                <!-- Vinilos y Calcomanías -->
+                <div class="bento-item bento-span-2-mobile bg-black/40 backdrop-blur-sm border border-white/10 text-white p-5 md:p-6 rounded-[20px] md:rounded-[24px] flex flex-col justify-end hover-target spotlight-card relative overflow-hidden group">
+                    <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
+                        <img src="assets/images/steps/paso4.webp" alt="Vinilos & Calcos" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                    </div>
+                    <div class="spotlight-content relative z-10">
+                        <h3 class="text-lg font-display font-bold">Vinilos & Calcos</h3>
+                    </div>
+                </div>
+
+                <!-- Papelería Corporativa (Oculto en móvil) -->
+                <div class="bento-item bg-black/40 backdrop-blur-sm border border-white/10 text-white p-5 md:p-6 rounded-[20px] md:rounded-[24px] flex flex-col justify-end hover-target spotlight-card relative overflow-hidden group hidden md:block">
+                    <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
+                        <img src="assets/images/steps/paso2.webp" alt="Papelería Corporativa" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                    </div>
+                    <div class="spotlight-content relative z-10 h-full flex flex-col justify-end">
+                        <h3 class="text-lg font-display font-bold">Papelería Corporativa</h3>
+                    </div>
+                </div>
+
+                <!-- Producción Mayorista (Oculto en móvil) -->
+                <div class="bento-item bento-span-2 bg-black/40 backdrop-blur-sm border border-white/10 text-white p-5 md:p-6 rounded-[20px] md:rounded-[24px] flex flex-col justify-end hover-target spotlight-card relative overflow-hidden group hidden md:block">
+                    <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
+                        <img src="assets/images/steps/paso1.webp" alt="Producción por Mayor" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                    </div>
+                    <div class="spotlight-content relative z-10 h-full flex flex-col justify-end">
+                        <h3 class="text-lg font-display font-bold">Producción por Mayor</h3>
+                    </div>
+                </div>
+
+                <!-- Grabado Láser (Oculto en móvil) -->
+                <div class="bento-item bg-black/40 backdrop-blur-sm border border-white/10 text-white p-5 md:p-6 rounded-[20px] md:rounded-[24px] flex flex-col justify-end hover-target spotlight-card relative overflow-hidden group hidden md:block">
+                    <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
+                        <img src="assets/images/steps/paso3.webp" alt="Grabado Láser" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                    </div>
+                    <div class="spotlight-content relative z-10 h-full flex flex-col justify-end">
+                        <h3 class="text-lg font-display font-bold">Grabado Láser</h3>
+                    </div>
+                </div>
+
+                <!-- Mockups y Pruebas (Oculto en móvil) -->
+                <div class="bento-item bg-black/40 backdrop-blur-sm border border-white/10 text-white p-5 md:p-6 rounded-[20px] md:rounded-[24px] flex flex-col justify-end hover-target spotlight-card relative overflow-hidden group hidden md:block">
+                    <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
+                        <img src="assets/images/steps/paso4.webp" alt="Mockups & Pruebas" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                    </div>
+                    <div class="spotlight-content relative z-10 h-full flex flex-col justify-end">
+                        <h3 class="text-lg font-display font-bold">Mockups & Pruebas</h3>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- 3. Productos Destacados (Infinite Gallery) -->
-    <section class="py-24 relative z-10 overflow-hidden" id="destacados">
+    <section class="py-16 md:py-24 relative z-10 overflow-hidden" id="destacados">
         <div class="max-w-7xl mx-auto px-6 mb-12 flex justify-between items-end section-header">
             <div>
-                <h2 class="text-3xl md:text-5xl font-display font-bold mb-4">Destacados</h2>
-                <p class="text-textSec text-lg">La cúspide de la ingeniería y el diseño.</p>
+                <h2 class="text-3xl md:text-5xl font-display font-bold mb-4" id="title-destacados"><span class="inline-block origin-center" id="destacados-d">D</span>estacados</h2>
+                <p class="text-textSec text-lg">Productos más pedidos por nuestros clientes.</p>
             </div>
         </div>
 
@@ -156,21 +272,22 @@
     </section>
 
     <!-- 4. Catálogo Completo (Glass Tabs) -->
-    <section class="py-24 relative z-10" id="productos">
+    <section class="py-16 md:py-24 relative z-10" id="productos">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-display font-bold mb-6">Catálogo Completo</h2>
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+                <h2 class="text-3xl md:text-5xl font-display font-bold mb-6 opacity-0 translate-y-8" id="title-catalogo">Catálogo Completo</h2>
                 
                 <!-- Glass Tabs -->
                 <div class="inline-flex glass p-1 rounded-full relative overflow-x-auto hide-scroll max-w-full">
-                    <div class="absolute left-1 top-1 bottom-1 bg-white/10 rounded-full transition-all duration-300 z-0" id="tab-indicator" style="width: 100px;"></div>
-                    <button class="tab-btn relative z-10 px-6 py-2 text-sm font-medium hover-target active-tab" data-filter="all">Todos</button>
-                    <button class="tab-btn relative z-10 px-6 py-2 text-sm font-medium text-textSec hover-target" data-filter="audio">Audio</button>
-                    <button class="tab-btn relative z-10 px-6 py-2 text-sm font-medium text-textSec hover-target" data-filter="wearables">Wearables</button>
-                    <button class="tab-btn relative z-10 px-6 py-2 text-sm font-medium text-textSec hover-target" data-filter="vision">Visión</button>
+                    <div class="absolute left-1 top-1 bottom-1 bg-primary rounded-full transition-all duration-300 z-0 shadow-lg" id="tab-indicator" style="width: 100px;"></div>
+                    <button class="tab-btn relative z-10 px-5 py-2 text-sm font-medium hover-target active-tab text-white whitespace-nowrap" data-filter="all">Todos</button>
+                    <button class="tab-btn relative z-10 px-5 py-2 text-sm font-medium text-textSec hover-target whitespace-nowrap" data-filter="indumentaria">Indumentaria</button>
+                    <button class="tab-btn relative z-10 px-5 py-2 text-sm font-medium text-textSec hover-target whitespace-nowrap" data-filter="tazas">Tazas & Mate</button>
+                    <button class="tab-btn relative z-10 px-5 py-2 text-sm font-medium text-textSec hover-target whitespace-nowrap" data-filter="vinilos">Vinilos</button>
+                    <button class="tab-btn relative z-10 px-5 py-2 text-sm font-medium text-textSec hover-target whitespace-nowrap" data-filter="papeleria">Papelería</button>
+                    <button class="tab-btn relative z-10 px-5 py-2 text-sm font-medium text-textSec hover-target whitespace-nowrap" data-filter="accesorios">Accesorios</button>
                 </div>
             </div>
-
             <!-- Grid Layout -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 catalog-grid">
                 <!-- Dynamically populated from products.js -->
@@ -178,160 +295,269 @@
         </div>
     </section>
 
-    <!-- 5. Metodología de Compra (Interactive Timeline Mobile First) -->
-    <section class="py-24 relative z-10" id="metodologia">
-        <div class="max-w-3xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-display font-bold mb-4">Metodología de Compra</h2>
-                <p class="text-textSec text-lg">Un proceso rápido, transparente y 100% digital.</p>
-            </div>
+    <!-- ============================================
+         SECCIONES APILADAS (Stacked Scroll Overlap)
+         Patrón: sticky siblings + spacer divs.
+         ============================================ -->
+    <div style="position: relative; width: 100%; isolation: isolate;">
 
-            <div class="relative">
-                <!-- Linea base -->
-                <div class="absolute left-[20px] md:left-[28px] top-4 bottom-4 w-[2px] bg-white/10 rounded-full">
-                    <div class="timeline-progress absolute top-0 left-0 w-full bg-primary shadow-[0_0_15px_rgba(255,212,0,0.5)] rounded-full" id="timeline-progress"></div>
+        <!-- ═══ SOBRE NOSOTROS ═══ -->
+        <section id="nosotros" class="w-full overflow-hidden"
+            style="position: sticky; top: 0; height: 100svh; min-height: 600px; z-index: 1; background-color: #121212;">
+            <div class="relative h-full w-full overflow-hidden" id="about-hero">
+                <img src="assets/images/steps/paso1.webp" alt="Equipo BEACON trabajando" class="absolute inset-0 w-full h-[120%] object-cover transform -translate-y-[10%]" id="about-parallax-img">
+                <div class="absolute inset-0 bg-gradient-to-b from-[#121212]/90 via-transparent to-[#121212]/90 z-[1]"></div>
+                <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.85)_0%,rgba(0,0,0,0.35)_45%,rgba(0,0,0,0.25)_58%,rgba(0,0,0,0.45)_78%,rgba(0,0,0,0.8)_100%)] z-[2]"></div>
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,92,45,0.18),transparent_34%)] z-[3]"></div>
+                <div class="relative z-10 flex h-full items-end">
+                    <div class="max-w-7xl mx-auto px-6 w-full pb-20 md:pb-24">
+                        <div class="max-w-2xl text-white">
+                            <p class="text-primary text-xs font-semibold uppercase tracking-[0.35em] mb-4">Sobre Nosotros</p>
+                            <h2 class="text-4xl md:text-6xl font-display font-bold leading-tight mb-6" id="sobre-nosotros-title">Somos el estudio que convierte ideas en identidad real.</h2>
+                            <p class="text-base md:text-lg text-white/80 leading-relaxed mb-8">Desde nuestros inicios, construimos marcas, productos y experiencias con una mezcla de diseño, producción y atención cercana.</p>
+                            <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                                <a href="#contacto" class="w-full sm:w-auto bg-primary text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-secondary transition-all duration-300 transform hover:scale-105 flex items-center justify-center text-center">Conectar con BEACON</a>
+                                <a href="#productos" class="w-full sm:w-auto border border-white/25 bg-white/10 backdrop-blur-md text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/20 transition-all duration-300 transform hover:scale-105 flex items-center justify-center text-center">Ver catálogo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spacer: tiempo de lectura para Sobre Nosotros -->
+        <div aria-hidden="true" style="height: 60vh; pointer-events: none;"></div>
+
+        <!-- ═══ NUESTRA HISTORIA ═══ -->
+        <section id="nuestra-historia" class="w-full flex flex-col justify-center py-10 md:py-0"
+            style="position: sticky; top: 0; height: 100svh; min-height: 600px; z-index: 2; background-color: #F9F3E9; box-shadow: 0 -20px 50px -10px rgba(0,0,0,0.3);">
+            <div class="mx-auto max-w-6xl px-6 w-full" id="about-reveal-card">
+                <div class="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-14 items-center">
+                    <div>
+                        <p class="text-primary text-xs font-semibold uppercase tracking-[0.35em] mb-4">Nuestra historia</p>
+                        <h3 class="text-3xl md:text-4xl font-display font-bold mb-6 leading-tight">Diseño premium, producción ágil y una relación cercana con cada cliente.</h3>
+                        <p class="text-textSec text-base md:text-lg leading-relaxed mb-4">
+                            <span class="text-primary font-bold">En BEACON</span> transformamos ideas en piezas que se ven bien, se sienten bien y dejan impresión. Combinamos diseño gráfico, sublimación, estampado y producción personalizada.
+                        </p>
+                        <p class="text-textSec text-base md:text-lg leading-relaxed hidden md:block">Cada proyecto se mueve con criterio, detalle y rapidez para que puedas lanzar, vender o presentar con confianza.</p>
+                    </div>
+
+                    <div class="flex flex-col gap-3 lg:gap-4" id="history-accordion">
+                        <!-- Accordion Item 1 -->
+                        <div class="glass-panel rounded-[20px] md:rounded-[24px] overflow-hidden accordion-item is-open">
+                            <button class="w-full flex items-center justify-between p-5 text-left font-display font-bold text-lg md:text-xl text-dark focus:outline-none accordion-header group">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white accordion-icon-bg transition-colors duration-300">
+                                        <i data-lucide="award" class="w-5 h-5"></i>
+                                    </div>
+                                    <span class="text-primary transition-colors duration-300 accordion-title">Experiencia 8+</span>
+                                </div>
+                                <svg class="w-5 h-5 text-primary transform rotate-180 accordion-chevron transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content" style="height: auto; overflow: hidden;">
+                                <div class="px-5 pb-5">
+                                    <p class="text-textSec text-sm mb-3">Años en el mercado perfeccionando nuestras técnicas y procesos para entregarte la mejor calidad posible.</p>
+                                    <div class="h-2 rounded-full bg-black/5 overflow-hidden">
+                                        <div class="h-full w-[85%] rounded-full bg-primary accordion-progress" data-width="85%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Accordion Item 2 -->
+                        <div class="glass-panel rounded-[20px] md:rounded-[24px] overflow-hidden accordion-item">
+                            <button class="w-full flex items-center justify-between p-5 text-left font-display font-bold text-lg md:text-xl text-dark focus:outline-none accordion-header group">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary accordion-icon-bg transition-colors duration-300">
+                                        <i data-lucide="layers" class="w-5 h-5"></i>
+                                    </div>
+                                    <span class="group-hover:text-primary transition-colors duration-300 accordion-title">Proyectos 15k</span>
+                                </div>
+                                <svg class="w-5 h-5 text-primary transform accordion-chevron transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content" style="height: 0; overflow: hidden;">
+                                <div class="px-5 pb-5">
+                                    <p class="text-textSec text-sm mb-3">Piezas diseñadas y producidas exitosamente para una amplia variedad de industrias.</p>
+                                    <div class="h-2 rounded-full bg-black/5 overflow-hidden">
+                                        <div class="h-full w-[0%] rounded-full bg-primary accordion-progress" data-width="95%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Accordion Item 3 -->
+                        <div class="glass-panel rounded-[20px] md:rounded-[24px] overflow-hidden accordion-item">
+                            <button class="w-full flex items-center justify-between p-5 text-left font-display font-bold text-lg md:text-xl text-dark focus:outline-none accordion-header group">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary accordion-icon-bg transition-colors duration-300">
+                                        <i data-lucide="users" class="w-5 h-5"></i>
+                                    </div>
+                                    <span class="group-hover:text-primary transition-colors duration-300 accordion-title">Clientes +2k</span>
+                                </div>
+                                <svg class="w-5 h-5 text-primary transform accordion-chevron transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content" style="height: 0; overflow: hidden;">
+                                <div class="px-5 pb-5">
+                                    <p class="text-textSec text-sm mb-3">Emprendedores, marcas y clubes que confían en nuestro criterio y atención personalizada.</p>
+                                    <div class="h-2 rounded-full bg-black/5 overflow-hidden">
+                                        <div class="h-full w-[0%] rounded-full bg-primary accordion-progress" data-width="92%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Accordion Item 4 -->
+                        <div class="glass-panel rounded-[20px] md:rounded-[24px] overflow-hidden accordion-item">
+                            <button class="w-full flex items-center justify-between p-5 text-left font-display font-bold text-lg md:text-xl text-dark focus:outline-none accordion-header group">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary accordion-icon-bg transition-colors duration-300">
+                                        <i data-lucide="trending-up" class="w-5 h-5"></i>
+                                    </div>
+                                    <span class="group-hover:text-primary transition-colors duration-300 accordion-title">Crecimiento 100%</span>
+                                </div>
+                                <svg class="w-5 h-5 text-primary transform accordion-chevron transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content" style="height: 0; overflow: hidden;">
+                                <div class="px-5 pb-5">
+                                    <p class="text-textSec text-sm mb-3">Estamos en constante evolución, adoptando nuevas tecnologías para superar tus expectativas.</p>
+                                    <div class="h-2 rounded-full bg-black/5 overflow-hidden">
+                                        <div class="h-full w-[0%] rounded-full bg-primary accordion-progress" data-width="100%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="space-y-10">
-                    <!-- Step 1 -->
-                    <div class="relative pl-14 md:pl-24 timeline-step group">
-                        <div class="absolute left-[11px] md:left-[19px] top-8 w-5 h-5 rounded-full bg-black border-2 border-white/20 z-10 step-dot transition-colors duration-500 transform -translate-x-1/2 flex items-center justify-center">
-                            <div class="w-2 h-2 rounded-full bg-primary opacity-0 dot-inner transition-opacity duration-300"></div>
+
+            </div>
+        </section>
+
+        <!-- Spacer: tiempo de lectura para Nuestra Historia -->
+        <div aria-hidden="true" style="height: 60vh; pointer-events: none;"></div>
+
+        <!-- ═══ NUESTRO EQUIPO ═══ -->
+        <section id="nuestro-equipo" class="w-full py-20 md:py-28"
+            style="position: relative; z-index: 3; background-color: #F9F9F7; box-shadow: 0 -20px 50px -10px rgba(0,0,0,0.3);">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="mb-10">
+                    <p class="text-primary text-xs font-semibold uppercase tracking-[0.35em] mb-3">Nuestro equipo</p>
+                    <h3 class="text-3xl md:text-4xl font-display font-bold">Personas que combinan creatividad, técnica y criterio.</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="equipo-grid">
+                    <div class="bg-white/50 backdrop-blur-md border border-black/5 p-6 rounded-[24px] equipo-card shadow-xl shadow-black/5">
+                        <div class="w-full h-56 rounded-[20px] bg-black/5 mb-5 overflow-hidden">
+                            <img src="assets/images/steps/paso2.webp" alt="Integrante del equipo" class="w-full h-full object-cover">
                         </div>
-                        <div class="glass-panel p-5 rounded-2xl md:rounded-[24px] transform transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(255,212,0,0.1)] border border-transparent hover:border-primary/20">
-                            <div class="w-full h-32 md:h-48 rounded-xl bg-white/5 mb-5 relative overflow-hidden group-hover:bg-white/10 transition-colors">
-                                <img src="assets/images/steps/paso1.webp" alt="Agregar productos" class="w-full h-full object-cover object-center opacity-80 group-hover:opacity-100 transition-opacity">
+                        <h4 class="text-xl font-display font-bold mb-2">Lautaro</h4>
+                        <p class="text-primary text-sm font-semibold uppercase tracking-[0.2em] mb-3">Director Creativo</p>
+                        <p class="text-textSec text-sm leading-relaxed">Define la identidad visual y guía cada proyecto con una mirada estratégica y premium.</p>
+                    </div>
+                    <div class="bg-white/50 backdrop-blur-md border border-black/5 p-6 rounded-[24px] equipo-card shadow-xl shadow-black/5">
+                        <div class="w-full h-56 rounded-[20px] bg-black/5 mb-5 overflow-hidden">
+                            <img src="assets/images/steps/paso3.webp" alt="Integrante del equipo" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-xl font-display font-bold mb-2">Mica</h4>
+                        <p class="text-primary text-sm font-semibold uppercase tracking-[0.2em] mb-3">Producción & Calidad</p>
+                        <p class="text-textSec text-sm leading-relaxed">Coordina la producción y cuida cada detalle para que el resultado sea impecable.</p>
+                    </div>
+                    <div class="bg-white/50 backdrop-blur-md border border-black/5 p-6 rounded-[24px] equipo-card shadow-xl shadow-black/5">
+                        <div class="w-full h-56 rounded-[20px] bg-black/5 mb-5 overflow-hidden">
+                            <img src="assets/images/steps/paso4.webp" alt="Integrante del equipo" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-xl font-display font-bold mb-2">Nico</h4>
+                        <p class="text-primary text-sm font-semibold uppercase tracking-[0.2em] mb-3">Cliente & Operaciones</p>
+                        <p class="text-textSec text-sm leading-relaxed">Acompaña cada pedido con una atención cercana y una respuesta rápida.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- 5. Metodología de Compra (Interactive Timeline Mobile First) -->
+    <section class="py-16 md:py-24 relative z-10" id="metodologia">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-primary text-xs font-semibold uppercase tracking-[0.35em] mb-4">¿Cómo trabajamos?</p>
+            <h2 class="text-3xl md:text-5xl font-display font-bold mb-4 min-h-[1.2em]" id="title-metodologia">Metodología de trabajo</h2>
+            <p class="text-textSec text-lg max-w-2xl mx-auto">Un proceso claro, ágil y transparente para que recibas exactamente lo que esperás, en tiempo y forma.</p>
+        </div>
+
+            <div class="relative mt-8">
+                <!-- Linea base (Vertical in mobile, Horizontal in desktop) -->
+                <div class="absolute left-[16px] top-4 bottom-4 w-[2px] md:top-[24px] md:left-[10%] md:right-[10%] md:bottom-auto md:w-auto md:h-[2px] bg-black/10 rounded-full z-0">
+                    <div class="timeline-progress absolute top-0 left-0 w-full h-0 md:w-0 md:h-full bg-primary shadow-[0_0_15px_rgba(255,92,45,0.5)] rounded-full" id="timeline-progress"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-left relative z-10">
+                    <!-- Step 1 -->
+                    <div class="relative pl-12 md:pl-0 md:pt-16 timeline-step group">
+                        <div class="absolute left-[9px] top-[24px] md:left-1/2 md:top-[17px] w-4 h-4 rounded-full bg-tertiary border-2 border-primary z-10 step-dot transform md:-translate-x-1/2 flex items-center justify-center transition-all duration-300">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary opacity-0 dot-inner transition-opacity duration-300"></div>
+                        </div>
+                        <div class="bg-transparent border border-black/10 p-5 rounded-2xl md:rounded-[24px] transform transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5">
+                            <div class="w-full h-32 md:h-40 rounded-xl bg-black/5 mb-5 relative overflow-hidden group-hover:bg-black/10 transition-colors">
+                                <img src="assets/images/steps/paso1.webp" alt="Agregar productos" class="w-full h-full object-cover object-center opacity-90 group-hover:opacity-100 transition-opacity">
                             </div>
-                            <h3 class="text-lg md:text-xl font-display font-bold text-primary mb-2">01. Agregá tus productos al carrito</h3>
-                            <p class="text-sm text-textSec leading-relaxed">Explorá nuestro catálogo y seleccioná los productos que necesitás de forma rápida y sencilla.</p>
+                            <h3 class="text-base md:text-lg font-display font-bold text-primary mb-2">01. Elegí diseños</h3>
+                            <p class="text-sm text-textSec leading-relaxed">Explorá el catálogo y seleccioná talles. Si no tenés diseño, lo creamos nosotros.</p>
                         </div>
                     </div>
 
                     <!-- Step 2 -->
-                    <div class="relative pl-14 md:pl-24 timeline-step group">
-                        <div class="absolute left-[11px] md:left-[19px] top-8 w-5 h-5 rounded-full bg-black border-2 border-white/20 z-10 step-dot transition-colors duration-500 transform -translate-x-1/2 flex items-center justify-center">
-                            <div class="w-2 h-2 rounded-full bg-primary opacity-0 dot-inner transition-opacity duration-300"></div>
+                    <div class="relative pl-12 md:pl-0 md:pt-16 timeline-step group">
+                        <div class="absolute left-[9px] top-[24px] md:left-1/2 md:top-[17px] w-4 h-4 rounded-full bg-tertiary border-2 border-primary z-10 step-dot transform md:-translate-x-1/2 flex items-center justify-center transition-all duration-300">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary opacity-0 dot-inner transition-opacity duration-300"></div>
                         </div>
-                        <div class="glass-panel p-5 rounded-2xl md:rounded-[24px] transform transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(255,212,0,0.1)] border border-transparent hover:border-primary/20">
-                            <div class="w-full h-32 md:h-48 rounded-xl bg-white/5 mb-5 relative overflow-hidden group-hover:bg-white/10 transition-colors">
-                                <img src="assets/images/steps/paso2.webp" alt="Enviá tu pedido por WhatsApp" class="w-full h-full object-cover object-center opacity-80 group-hover:opacity-100 transition-opacity">
+                        <div class="bg-transparent border border-black/10 p-5 rounded-2xl md:rounded-[24px] transform transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5">
+                            <div class="w-full h-32 md:h-40 rounded-xl bg-black/5 mb-5 relative overflow-hidden group-hover:bg-black/10 transition-colors">
+                                <img src="assets/images/steps/paso2.webp" alt="Enviá tu pedido" class="w-full h-full object-cover object-center opacity-90 group-hover:opacity-100 transition-opacity">
                             </div>
-                            <h3 class="text-lg md:text-xl font-display font-bold text-primary mb-2">02. Enviá tu pedido por WhatsApp</h3>
-                            <p class="text-sm text-textSec leading-relaxed">Confirmá tu selección enviando el pedido directamente por WhatsApp para recibir atención personalizada.</p>
+                            <h3 class="text-base md:text-lg font-display font-bold text-primary mb-2">02. Pedí por WA</h3>
+                            <p class="text-sm text-textSec leading-relaxed">Confirmá tu pedido. Te respondemos con presupuesto y opciones de pago.</p>
                         </div>
                     </div>
 
                     <!-- Step 3 -->
-                    <div class="relative pl-14 md:pl-24 timeline-step group">
-                        <div class="absolute left-[11px] md:left-[19px] top-8 w-5 h-5 rounded-full bg-black border-2 border-white/20 z-10 step-dot transition-colors duration-500 transform -translate-x-1/2 flex items-center justify-center">
-                            <div class="w-2 h-2 rounded-full bg-primary opacity-0 dot-inner transition-opacity duration-300"></div>
+                    <div class="relative pl-12 md:pl-0 md:pt-16 timeline-step group">
+                        <div class="absolute left-[9px] top-[24px] md:left-1/2 md:top-[17px] w-4 h-4 rounded-full bg-tertiary border-2 border-primary z-10 step-dot transform md:-translate-x-1/2 flex items-center justify-center transition-all duration-300">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary opacity-0 dot-inner transition-opacity duration-300"></div>
                         </div>
-                        <div class="glass-panel p-5 rounded-2xl md:rounded-[24px] transform transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(255,212,0,0.1)] border border-transparent hover:border-primary/20">
-                            <div class="w-full h-32 md:h-48 rounded-xl bg-white/5 mb-5 relative overflow-hidden group-hover:bg-white/10 transition-colors">
-                                <img src="assets/images/steps/paso3.webp" alt="Recibí tu pedido sin costo" class="w-full h-full object-cover object-center opacity-80 group-hover:opacity-100 transition-opacity">
+                        <div class="bg-transparent border border-black/10 p-5 rounded-2xl md:rounded-[24px] transform transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5">
+                            <div class="w-full h-32 md:h-40 rounded-xl bg-black/5 mb-5 relative overflow-hidden group-hover:bg-black/10 transition-colors">
+                                <img src="assets/images/steps/paso3.webp" alt="Aprobá y producimos" class="w-full h-full object-cover object-center opacity-90 group-hover:opacity-100 transition-opacity">
                             </div>
-                            <h3 class="text-lg md:text-xl font-display font-bold text-primary mb-2">03. Recibí tu pedido sin costo</h3>
-                            <p class="text-sm text-textSec leading-relaxed">Nos encargamos de la entrega para que recibas tu compra de manera rápida, cómoda y totalmente gratuita.</p>
+                            <h3 class="text-base md:text-lg font-display font-bold text-primary mb-2">03. Producimos</h3>
+                            <p class="text-sm text-textSec leading-relaxed">Te enviamos mockup. Una vez confirmado, arrancamos la producción.</p>
                         </div>
                     </div>
                     
                     <!-- Step 4 -->
-                    <div class="relative pl-14 md:pl-24 timeline-step group">
-                        <div class="absolute left-[11px] md:left-[19px] top-8 w-5 h-5 rounded-full bg-black border-2 border-white/20 z-10 step-dot transition-colors duration-500 transform -translate-x-1/2 flex items-center justify-center">
-                            <div class="w-2 h-2 rounded-full bg-primary opacity-0 dot-inner transition-opacity duration-300"></div>
+                    <div class="relative pl-12 md:pl-0 md:pt-16 timeline-step group">
+                        <div class="absolute left-[9px] top-[24px] md:left-1/2 md:top-[17px] w-4 h-4 rounded-full bg-tertiary border-2 border-primary z-10 step-dot transform md:-translate-x-1/2 flex items-center justify-center transition-all duration-300">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary opacity-0 dot-inner transition-opacity duration-300"></div>
                         </div>
-                        <div class="glass-panel p-5 rounded-2xl md:rounded-[24px] transform transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(255,212,0,0.1)] border border-transparent hover:border-primary/20">
-                            <div class="w-full h-32 md:h-48 rounded-xl bg-white/5 mb-5 relative overflow-hidden group-hover:bg-white/10 transition-colors">
-                                <img src="assets/images/steps/paso4.webp" alt="Disfrutá tus productos" class="w-full h-full object-cover object-center opacity-80 group-hover:opacity-100 transition-opacity">
+                        <div class="bg-transparent border border-black/10 p-5 rounded-2xl md:rounded-[24px] transform transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5">
+                            <div class="w-full h-32 md:h-40 rounded-xl bg-black/5 mb-5 relative overflow-hidden group-hover:bg-black/10 transition-colors">
+                                <img src="assets/images/steps/paso4.webp" alt="Disfrutá tus productos" class="w-full h-full object-cover object-center opacity-90 group-hover:opacity-100 transition-opacity">
                             </div>
-                            <h3 class="text-lg md:text-xl font-display font-bold text-primary mb-2">04. Disfrutá tus productos</h3>
-                            <p class="text-sm text-textSec leading-relaxed">Recibí tu pedido y comenzá a disfrutarlo con la tranquilidad de haber comprado de forma simple y segura.</p>
+                            <h3 class="text-base md:text-lg font-display font-bold text-primary mb-2">04. Disfrutá</h3>
+                            <p class="text-sm text-textSec leading-relaxed">Entregamos a domicilio o retirás por el local. Listos para usar.</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. Métricas de Confianza (Interactive Pie Charts) -->
-    <section class="py-24 relative z-10 bg-white/[0.02] border-y border-white/5" id="beneficios">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-display font-bold mb-4">Métricas de Confianza</h2>
-                <p class="text-textSec text-lg">Resultados reales que respaldan nuestra excelencia en servicio.</p>
-            </div>
-
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                <!-- Chart 1 -->
-                <div class="glass-panel p-6 md:p-8 rounded-[24px] flex flex-col items-center text-center group hover:-translate-y-2 transition-transform duration-300 hover:shadow-[0_8px_30px_rgba(255,212,0,0.05)]">
-                    <div class="relative w-24 h-24 md:w-32 md:h-32 mb-6">
-                        <svg class="w-full h-full transform -rotate-90 drop-shadow-[0_0_10px_rgba(255,212,0,0.2)]" viewBox="0 0 100 100">
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="6"></circle>
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--primary)" stroke-width="6" stroke-dasharray="283" stroke-dashoffset="283" class="pie-progress" data-percent="98" stroke-linecap="round"></circle>
-                        </svg>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <span class="text-2xl md:text-4xl font-display font-bold text-white"><span class="counter" data-target="98">0</span>%</span>
-                        </div>
-                    </div>
-                    <h4 class="text-xs md:text-sm font-medium uppercase tracking-wider text-textSec group-hover:text-primary transition-colors">Clientes Satisfechos</h4>
-                </div>
-
-                <!-- Chart 2 -->
-                <div class="glass-panel p-6 md:p-8 rounded-[24px] flex flex-col items-center text-center group hover:-translate-y-2 transition-transform duration-300 hover:shadow-[0_8px_30px_rgba(255,212,0,0.05)]">
-                    <div class="relative w-24 h-24 md:w-32 md:h-32 mb-6">
-                        <svg class="w-full h-full transform -rotate-90 drop-shadow-[0_0_10px_rgba(255,212,0,0.2)]" viewBox="0 0 100 100">
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="6"></circle>
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--primary)" stroke-width="6" stroke-dasharray="283" stroke-dashoffset="283" class="pie-progress" data-percent="95" stroke-linecap="round"></circle>
-                        </svg>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <span class="text-2xl md:text-4xl font-display font-bold text-white"><span class="counter" data-target="95">0</span>%</span>
-                        </div>
-                    </div>
-                    <h4 class="text-xs md:text-sm font-medium uppercase tracking-wider text-textSec group-hover:text-primary transition-colors">Entregas en Tiempo</h4>
-                </div>
-
-                <!-- Chart 3 -->
-                <div class="glass-panel p-6 md:p-8 rounded-[24px] flex flex-col items-center text-center group hover:-translate-y-2 transition-transform duration-300 hover:shadow-[0_8px_30px_rgba(255,212,0,0.05)]">
-                    <div class="relative w-24 h-24 md:w-32 md:h-32 mb-6">
-                        <svg class="w-full h-full transform -rotate-90 drop-shadow-[0_0_10px_rgba(255,212,0,0.2)]" viewBox="0 0 100 100">
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="6"></circle>
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--primary)" stroke-width="6" stroke-dasharray="283" stroke-dashoffset="283" class="pie-progress" data-percent="100" stroke-linecap="round"></circle>
-                        </svg>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <span class="text-2xl md:text-4xl font-display font-bold text-white"><span class="counter" data-target="100">0</span>%</span>
-                        </div>
-                    </div>
-                    <h4 class="text-xs md:text-sm font-medium uppercase tracking-wider text-textSec group-hover:text-primary transition-colors">Atención Personalizada</h4>
-                </div>
-
-                <!-- Chart 4 -->
-                <div class="glass-panel p-6 md:p-8 rounded-[24px] flex flex-col items-center text-center group hover:-translate-y-2 transition-transform duration-300 hover:shadow-[0_8px_30px_rgba(255,212,0,0.05)]">
-                    <div class="relative w-24 h-24 md:w-32 md:h-32 mb-6">
-                        <svg class="w-full h-full transform -rotate-90 drop-shadow-[0_0_10px_rgba(255,212,0,0.2)]" viewBox="0 0 100 100">
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="6"></circle>
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--primary)" stroke-width="6" stroke-dasharray="283" stroke-dashoffset="283" class="pie-progress" data-percent="92" stroke-linecap="round"></circle>
-                        </svg>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <span class="text-2xl md:text-4xl font-display font-bold text-white"><span class="counter" data-target="92">0</span>%</span>
-                        </div>
-                    </div>
-                    <h4 class="text-xs md:text-sm font-medium uppercase tracking-wider text-textSec group-hover:text-primary transition-colors">Clientes Recurrentes</h4>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 7. Testimonios (Glass Slider) -->
-    <section class="py-24 relative z-10 overflow-hidden">
+    <section class="py-16 md:py-24 relative z-10 overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 mb-16 text-center">
             <h2 class="text-3xl md:text-5xl font-display font-bold mb-4">Lo que dicen de nosotros</h2>
+            <p class="text-textSec text-lg max-w-2xl mx-auto">Historias reales de clientes que confiaron en BEACON para llevar su marca y sus ideas a productos físicos.</p>
         </div>
 
         <div class="swiper testimonial-slider pb-12 w-full !max-w-none px-4 md:px-12">
             <div class="swiper-wrapper swiper-linear-wrapper">
-                <!-- Testimonial 1 -->
                 <div class="swiper-slide">
-                    <div class="glass-panel p-8 rounded-3xl opacity-50 transition-opacity duration-300 transform scale-90 testimonial-card">
+                    <div class="glass-panel p-8 rounded-3xl">
                         <div class="flex gap-1 text-primary mb-6">
                             <i data-lucide="star" class="fill-current w-5 h-5"></i>
                             <i data-lucide="star" class="fill-current w-5 h-5"></i>
@@ -339,19 +565,18 @@
                             <i data-lucide="star" class="fill-current w-5 h-5"></i>
                             <i data-lucide="star" class="fill-current w-5 h-5"></i>
                         </div>
-                        <p class="text-lg md:text-xl font-medium mb-8">"La experiencia de unboxing y la calidad del Nexus Void Pro superaron todo lo que había probado antes. El audio espacial es de otro planeta."</p>
+                        <p class="text-lg md:text-xl font-medium mb-8">"Transformaron nuestro diseño en remeras y tazas con una calidad impresionante. Todo salió perfecto para la fecha del evento."</p>
                         <div class="flex items-center gap-4">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop" class="w-12 h-12 rounded-full object-cover" alt="Elena R.">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-semibold">ER</div>
                             <div>
                                 <h5 class="font-bold">Elena R.</h5>
-                                <p class="text-xs text-textSec">Productora Musical</p>
+                                <p class="text-xs text-textSec">Marca de eventos</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Testimonial 2 -->
                 <div class="swiper-slide">
-                    <div class="glass-panel p-8 rounded-3xl opacity-50 transition-opacity duration-300 transform scale-90 testimonial-card">
+                    <div class="glass-panel p-8 rounded-3xl">
                         <div class="flex gap-1 text-primary mb-6">
                             <i data-lucide="star" class="fill-current w-5 h-5"></i>
                             <i data-lucide="star" class="fill-current w-5 h-5"></i>
@@ -359,19 +584,18 @@
                             <i data-lucide="star" class="fill-current w-5 h-5"></i>
                             <i data-lucide="star" class="fill-current w-5 h-5"></i>
                         </div>
-                        <p class="text-lg md:text-xl font-medium mb-8">"El Quantum Chrono no es solo un smartwatch, es una obra de arte en titanio. El monitoreo es extremadamente preciso."</p>
+                        <p class="text-lg md:text-xl font-medium mb-8">"Nos ayudaron a darle una identidad visual fuerte a nuestra colección. Los colores y el acabado quedaron impecables."</p>
                         <div class="flex items-center gap-4">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop" class="w-12 h-12 rounded-full object-cover" alt="Marcos T.">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-semibold">MT</div>
                             <div>
                                 <h5 class="font-bold">Marcos T.</h5>
-                                <p class="text-xs text-textSec">Atleta Profesional</p>
+                                <p class="text-xs text-textSec">Club deportivo</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Testimonial 3 -->
                 <div class="swiper-slide">
-                    <div class="glass-panel p-8 rounded-3xl opacity-50 transition-opacity duration-300 transform scale-90 testimonial-card">
+                    <div class="glass-panel p-8 rounded-3xl">
                         <div class="flex gap-1 text-primary mb-6">
                             <i data-lucide="star" class="fill-current w-5 h-5"></i>
                             <i data-lucide="star" class="fill-current w-5 h-5"></i>
@@ -379,72 +603,12 @@
                             <i data-lucide="star" class="fill-current w-5 h-5"></i>
                             <i data-lucide="star" class="fill-current w-5 h-5"></i>
                         </div>
-                        <p class="text-lg md:text-xl font-medium mb-8">"Comprar en esta plataforma fue una experiencia en sí misma. La atención al detalle desde la web hasta la entrega es inigualable."</p>
+                        <p class="text-lg md:text-xl font-medium mb-8">"Excelente predisposición y rapidez. Los buzos de egresados quedaron tal cual los soñamos. 100% recomendados."</p>
                         <div class="flex items-center gap-4">
-                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop" class="w-12 h-12 rounded-full object-cover" alt="Sofía L.">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-semibold">SL</div>
                             <div>
                                 <h5 class="font-bold">Sofía L.</h5>
-                                <p class="text-xs text-textSec">Tech Reviewer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Testimonial 4 (Duplicate of 1) -->
-                <div class="swiper-slide">
-                    <div class="glass-panel p-8 rounded-3xl opacity-50 transition-opacity duration-300 transform scale-90 testimonial-card">
-                        <div class="flex gap-1 text-primary mb-6">
-                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        </div>
-                        <p class="text-lg md:text-xl font-medium mb-8">"La experiencia de unboxing y la calidad del Nexus Void Pro superaron todo lo que había probado antes. El audio espacial es de otro planeta."</p>
-                        <div class="flex items-center gap-4">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop" class="w-12 h-12 rounded-full object-cover" alt="Elena R.">
-                            <div>
-                                <h5 class="font-bold">Elena R.</h5>
-                                <p class="text-xs text-textSec">Productora Musical</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Testimonial 5 (Duplicate of 2) -->
-                <div class="swiper-slide">
-                    <div class="glass-panel p-8 rounded-3xl opacity-50 transition-opacity duration-300 transform scale-90 testimonial-card">
-                        <div class="flex gap-1 text-primary mb-6">
-                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        </div>
-                        <p class="text-lg md:text-xl font-medium mb-8">"El Quantum Chrono no es solo un smartwatch, es una obra de arte en titanio. El monitoreo es extremadamente preciso."</p>
-                        <div class="flex items-center gap-4">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop" class="w-12 h-12 rounded-full object-cover" alt="Marcos T.">
-                            <div>
-                                <h5 class="font-bold">Marcos T.</h5>
-                                <p class="text-xs text-textSec">Atleta Profesional</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Testimonial 6 (Duplicate of 3) -->
-                <div class="swiper-slide">
-                    <div class="glass-panel p-8 rounded-3xl opacity-50 transition-opacity duration-300 transform scale-90 testimonial-card">
-                        <div class="flex gap-1 text-primary mb-6">
-                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        </div>
-                        <p class="text-lg md:text-xl font-medium mb-8">"Comprar en esta plataforma fue una experiencia en sí misma. La atención al detalle desde la web hasta la entrega es inigualable."</p>
-                        <div class="flex items-center gap-4">
-                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop" class="w-12 h-12 rounded-full object-cover" alt="Sofía L.">
-                            <div>
-                                <h5 class="font-bold">Sofía L.</h5>
-                                <p class="text-xs text-textSec">Tech Reviewer</p>
+                                <p class="text-xs text-textSec">Emprendedora</p>
                             </div>
                         </div>
                     </div>
@@ -455,7 +619,7 @@
     </section>
 
     <!-- 8. CTA Premium (Section Overlap) -->
-    <section class="section-overlap bg-dark py-32 relative z-20 overflow-hidden border-t border-white/10 rounded-t-[40px]" id="cta-section">
+    <section class="section-overlap bg-tertiary py-32 relative z-20 overflow-hidden border-t border-black/10" id="cta-section">
         <!-- Background Video -->
         <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none" id="cta-video">
             <source src="assets/videos/videocrlbucle.mp4" type="video/mp4">
@@ -464,22 +628,19 @@
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] pointer-events-none"></div>
         
         <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-            <h2 class="text-4xl md:text-7xl font-display font-bold mb-6 split-text">
+            <h2 class="text-4xl md:text-7xl font-display font-bold mb-10 split-text">
                 Elevá tu <br/> Estándar.
             </h2>
-            <p class="text-xl text-textSec mb-10 max-w-2xl mx-auto reveal-up">
-                Unite a la élite de usuarios que ya experimentan el futuro de la tecnología personal. Stock limitado.
-            </p>
             <div class="reveal-up">
-                <a href="#productos" class="bg-primary text-black px-10 py-5 rounded-full font-bold text-xl hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105 shadow-[0_0_40px_rgba(255,212,0,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.4)] magnetic hover-target inline-block" data-magnetic>
-                    Acceso Exclusivo
+                <a href="#productos" class="bg-primary text-white px-10 py-5 rounded-xl font-bold text-xl hover:bg-secondary transition-all duration-300 transform hover:scale-105 shadow-[0_0_40px_rgba(255,92,45,0.3)] hover:shadow-[0_0_60px_rgba(255,92,45,0.4)] magnetic hover-target inline-block" data-magnetic>
+                    Cotizar mi proyecto
                 </a>
             </div>
         </div>
     </section>
 
     <!-- 8.5 Ubicación y Contacto -->
-    <section class="py-24 relative z-20 bg-black/80 backdrop-blur-lg border-y border-white/5" id="contacto">
+    <section class="py-16 md:py-24 relative z-20 bg-[#F9F3E9] backdrop-blur-lg border-y border-black/5" id="contacto">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-5xl font-display font-bold mb-4">Ubicación y Contacto</h2>
@@ -491,7 +652,7 @@
                 <div class="glass-panel p-8 rounded-3xl flex flex-col justify-center">
                     <div class="space-y-8">
                         <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 text-primary">
+                            <div class="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center flex-shrink-0 text-primary">
                                 <i data-lucide="map-pin"></i>
                             </div>
                             <div>
@@ -501,7 +662,7 @@
                         </div>
                         
                         <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 text-primary">
+                            <div class="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center flex-shrink-0 text-primary">
                                 <i data-lucide="clock"></i>
                             </div>
                             <div>
@@ -511,7 +672,7 @@
                         </div>
 
                         <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 text-primary">
+                            <div class="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center flex-shrink-0 text-primary">
                                 <i data-lucide="phone"></i>
                             </div>
                             <div>
@@ -521,7 +682,7 @@
                         </div>
 
                         <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 text-primary">
+                            <div class="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center flex-shrink-0 text-primary">
                                 <i data-lucide="mail"></i>
                             </div>
                             <div>
@@ -531,10 +692,10 @@
                         </div>
                     </div>
                     
-                    <div class="mt-12 pt-8 border-t border-white/10 flex gap-4">
-                        <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-black transition-colors hover-target"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-                        <a href="https://linkedin.com" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-black transition-colors hover-target"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-                        <a href="https://x.com" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-black transition-colors hover-target"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                    <div class="mt-12 pt-8 border-t border-black/10 flex gap-4">
+                        <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center hover:bg-primary hover:text-white transition-colors hover-target"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        <a href="https://linkedin.com" target="_blank" class="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center hover:bg-primary hover:text-white transition-colors hover-target"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                        <a href="https://x.com" target="_blank" class="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center hover:bg-primary hover:text-white transition-colors hover-target"><i data-lucide="twitter" class="w-5 h-5"></i></a>
                     </div>
                 </div>
 
@@ -555,7 +716,7 @@
     </section>
 
     <!-- 9. Footer Premium -->
-    <footer class="bg-black pt-20 pb-10 border-t border-white/5 relative z-20">
+    <footer class="bg-tertiary pt-20 pb-10 border-t border-black/5 relative z-20">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
                 <div class="md:col-span-1">
@@ -590,15 +751,15 @@
                     <h4 class="font-bold mb-6 uppercase tracking-wider text-sm">Newsletter</h4>
                     <p class="text-sm text-textSec mb-4">Recibí invitaciones a lanzamientos privados.</p>
                     <div class="flex gap-2">
-                        <input type="email" placeholder="Tu email" class="bg-white/5 border border-white/10 rounded-full px-4 py-2 w-full text-sm focus:outline-none focus:border-primary transition-colors">
-                        <button class="bg-primary text-black w-10 h-10 rounded-full flex items-center justify-center hover:bg-white transition-colors hover-target flex-shrink-0">
+                        <input type="email" placeholder="Tu email" class="bg-[#F9F3E9] border border-black/10 rounded-full px-4 py-2 w-full text-sm focus:outline-none focus:border-primary transition-colors">
+                        <button class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition-colors hover-target flex-shrink-0">
                             <i data-lucide="arrow-right" class="w-4 h-4"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <div class="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/10 text-xs text-textSec">
+            <div class="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-black/10 text-xs text-textSec">
                 <p>&copy; 2026 BEACON. Todos los derechos reservados.</p>
                 <div class="flex space-x-6 mt-4 md:mt-0">
                     <a href="https://instagram.com" target="_blank" class="hover:text-primary transition-colors hover-target"><i data-lucide="instagram" class="w-4 h-4"></i></a>
@@ -613,11 +774,11 @@
     <div id="cart-overlay" class="cart-overlay"></div>
     <div id="cart-drawer" class="cart-drawer">
         <!-- Header -->
-        <div class="flex items-center justify-between p-6 border-b border-white/10">
-            <h3 class="text-xl font-display font-bold text-white flex items-center gap-2">
+        <div class="flex items-center justify-between p-6 border-b border-black/10">
+            <h3 class="text-xl font-display font-bold text-dark flex items-center gap-2">
                 <i data-lucide="shopping-bag" class="text-primary w-5 h-5"></i> Carrito de Compras
             </h3>
-            <button id="cart-close-btn" class="text-white/60 hover:text-white transition-colors p-2 hover:bg-white/5 rounded-full">
+            <button id="cart-close-btn" class="text-dark/60 hover:text-dark transition-colors p-2 hover:bg-black/5 rounded-full">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
         </div>
@@ -629,43 +790,43 @@
 
         <!-- Empty State -->
         <div id="cart-empty-state" class="flex-grow flex flex-col items-center justify-center p-6 text-center">
-            <i data-lucide="shopping-bag" class="w-16 h-16 text-white/10 mb-4"></i>
-            <h4 class="text-lg font-bold text-white mb-2">Tu carrito está vacío</h4>
+            <i data-lucide="shopping-bag" class="w-16 h-16 text-black/10 mb-4"></i>
+            <h4 class="text-lg font-bold text-dark mb-2">Tu carrito está vacío</h4>
             <p class="text-textSec text-sm max-w-[260px] mx-auto leading-relaxed">
-                Explorá nuestro catálogo de tecnología premium y agregá tus productos preferidos.
+                Explorá nuestro catálogo de sublimación, diseño y productos físicos para tu marca o evento.
             </p>
         </div>
 
         <!-- Checkout Summary -->
-        <div id="cart-checkout-wrapper" class="p-6 border-t border-white/10 bg-black/40">
+        <div id="cart-checkout-wrapper" class="p-6 border-t border-black/10 bg-[#F9F3E9]/60">
             <div class="flex justify-between items-center mb-6">
                 <span class="text-textSec text-sm">Subtotal estimado</span>
-                <span id="cart-subtotal" class="text-2xl font-display font-bold text-white">$0</span>
+                <span id="cart-subtotal" class="text-2xl font-display font-bold text-dark">$0</span>
             </div>
-            <button id="cart-checkout-btn" class="w-full bg-primary text-black py-4 rounded-xl font-semibold text-base hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(255,212,0,0.2)]">
+            <button id="cart-checkout-btn" class="w-full bg-primary text-white py-4 rounded-xl font-semibold text-base hover:bg-secondary transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(255,92,45,0.2)]">
                 Confirmar por WhatsApp <i data-lucide="arrow-right" class="w-5 h-5"></i>
             </button>
             <p class="text-[10px] text-center text-textSec mt-4 leading-normal">
-                Envíos gratuitos a todo el país. Coordiná la forma de pago y entrega de manera directa e inmediata con un asistente VIP.
+                Envíos a todo el país. Coordiná la forma de pago y entrega con un asesor para tu pedido personalizado.
             </p>
         </div>
     </div>
 
     <!-- FLOATING CART BAR -->
-    <div id="floating-cart" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40 bg-black/80 backdrop-blur-xl border border-white/10 rounded-full px-6 py-3.5 shadow-[0_10px_35px_rgba(0,0,0,0.6)] flex items-center justify-between gap-6 pointer-events-none opacity-0 translate-y-10 transition-all duration-500 max-w-[90vw] md:max-w-md w-full">
+    <div id="floating-cart" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40 bg-tertiary/95 backdrop-blur-xl border border-black/10 rounded-full px-6 py-3.5 shadow-[0_10px_35px_rgba(0,0,0,0.12)] flex items-center justify-between gap-6 pointer-events-none opacity-0 translate-y-10 transition-all duration-500 max-w-[90vw] md:max-w-md w-full">
         <div class="flex items-center gap-3">
             <div class="relative">
                 <div class="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                 </div>
-                <span id="floating-cart-count" class="absolute -top-1 -right-1 bg-primary text-black text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                <span id="floating-cart-count" class="absolute -top-1 -right-1 bg-primary text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
             </div>
             <div>
                 <p class="text-[10px] text-textSec uppercase tracking-wider font-semibold">Tu Carrito</p>
-                <p id="floating-cart-total" class="text-sm font-bold text-white">$0</p>
+                <p id="floating-cart-total" class="text-sm font-bold text-dark">$0</p>
             </div>
         </div>
-        <button id="floating-cart-view-btn" class="pointer-events-auto bg-primary text-black hover:bg-white hover:text-black text-xs font-bold px-5 py-2.5 rounded-full transition-all duration-300 flex items-center gap-1.5 shadow-[0_0_15px_rgba(255,212,0,0.15)]">
+        <button id="floating-cart-view-btn" class="pointer-events-auto bg-primary text-white hover:bg-secondary text-xs font-bold px-5 py-2.5 rounded-full transition-all duration-300 flex items-center gap-1.5 shadow-[0_0_15px_rgba(255,92,45,0.15)]">
             Ver Carrito <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
         </button>
     </div>
@@ -673,26 +834,26 @@
     <!-- PRODUCT DETAIL MODAL -->
     <div id="product-modal" class="fixed inset-0 z-[150] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
         <!-- Modal Backdrop -->
-        <div id="product-modal-backdrop" class="absolute inset-0 bg-black/80 backdrop-blur-md"></div>
+        <div id="product-modal-backdrop" class="absolute inset-0 bg-dark/40 backdrop-blur-md"></div>
         
         <!-- Modal Box -->
-        <div class="relative w-full max-w-2xl bg-dark border border-white/10 rounded-[32px] overflow-hidden glass-panel flex flex-col md:flex-row z-10 transform scale-95 transition-all duration-300">
+        <div class="relative w-full max-w-2xl bg-tertiary border border-black/10 rounded-[32px] overflow-hidden glass-panel flex flex-col md:flex-row z-10 transform scale-95 transition-all duration-300">
             <!-- Close Button -->
-            <button id="product-modal-close" class="absolute top-4 right-4 text-white/60 hover:text-white p-2 hover:bg-white/5 rounded-full z-20 transition-colors">
+            <button id="product-modal-close" class="absolute top-4 right-4 text-dark/60 hover:text-dark p-2 hover:bg-black/5 rounded-full z-20 transition-colors">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
             
             <!-- Image Column -->
-            <div class="w-full md:w-1/2 h-64 md:h-auto bg-white/5 relative overflow-hidden flex-shrink-0">
+            <div class="w-full md:w-1/2 h-64 md:h-auto bg-black/5 relative overflow-hidden flex-shrink-0">
                 <img id="modal-product-img" src="" alt="" class="w-full h-full object-cover">
             </div>
             
             <!-- Details Column -->
             <div class="w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-between">
                 <div>
-                    <span id="modal-product-badge" class="inline-block bg-primary text-black text-[10px] font-bold px-3 py-1 rounded-full mb-3 uppercase tracking-wider hidden">NUEVO</span>
+                    <span id="modal-product-badge" class="inline-block bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full mb-3 uppercase tracking-wider hidden">NUEVO</span>
                     <span id="modal-product-subtitle" class="text-xs text-primary font-semibold tracking-wider uppercase block mb-1"></span>
-                    <h3 id="modal-product-name" class="text-2xl font-display font-bold text-white leading-tight mb-3"></h3>
+                    <h3 id="modal-product-name" class="text-2xl font-display font-bold text-dark leading-tight mb-3"></h3>
                     <p id="modal-product-desc" class="text-textSec text-sm leading-relaxed mb-6"></p>
                 </div>
                 
@@ -701,23 +862,23 @@
                     <div class="flex items-center justify-between">
                         <div class="flex flex-col">
                             <span class="text-[10px] text-textSec uppercase tracking-wider">Precio Unitario</span>
-                            <span id="modal-product-price" class="text-2xl font-display font-bold text-white"></span>
+                            <span id="modal-product-price" class="text-2xl font-display font-bold text-dark"></span>
                         </div>
                         
                         <!-- Quantity Selector -->
-                        <div class="flex items-center gap-3 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">
-                            <button id="modal-dec-qty" class="text-white hover:text-primary transition-colors p-1">
+                        <div class="flex items-center gap-3 bg-[#F9F3E9] border border-black/10 px-3 py-1.5 rounded-full">
+                            <button id="modal-dec-qty" class="text-dark hover:text-primary transition-colors p-1">
                                 <i data-lucide="minus" class="w-4 h-4"></i>
                             </button>
-                            <span id="modal-qty-val" class="text-sm font-semibold w-6 text-center text-white">1</span>
-                            <button id="modal-inc-qty" class="text-white hover:text-primary transition-colors p-1">
+                            <span id="modal-qty-val" class="text-sm font-semibold w-6 text-center text-dark">1</span>
+                            <button id="modal-inc-qty" class="text-dark hover:text-primary transition-colors p-1">
                                 <i data-lucide="plus" class="w-4 h-4"></i>
                             </button>
                         </div>
                     </div>
                     
                     <!-- Add to Cart Button -->
-                    <button id="modal-add-btn" class="w-full bg-primary text-black py-4 rounded-xl font-semibold text-base hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(255,212,0,0.2)]">
+                    <button id="modal-add-btn" class="w-full bg-primary text-white py-4 rounded-xl font-semibold text-base hover:bg-secondary transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(255,92,45,0.2)]">
                         <i data-lucide="shopping-bag" class="w-5 h-5"></i> Agregar al Carrito
                     </button>
                 </div>
@@ -729,6 +890,7 @@
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
     <!-- SplitType (Open Source alternative to SplitText) -->
     <script src="https://unpkg.com/split-type"></script>
     <!-- Lenis for Smooth Scroll -->

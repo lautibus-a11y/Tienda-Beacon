@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
             floatingCartCount.textContent = totalItems;
-            floatingCartTotal.textContent = `$${subtotal}`;
+            floatingCartTotal.textContent = `$${subtotal.toLocaleString('es-AR')}`;
         }
         
         updateFloatingCartVisibility();
@@ -149,18 +149,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const itemTotal = product.price * item.quantity;
             subtotal += itemTotal;
 
+            const icon = product.icon || (window.CATEGORY_ICONS && window.CATEGORY_ICONS[product.category]) || 'package';
             return `
-                <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 group transition-all hover:bg-white/10">
-                    <div class="w-16 h-16 rounded-xl overflow-hidden bg-white/5 flex-shrink-0">
-                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+                <div class="flex items-center gap-4 p-4 rounded-2xl bg-background border border-black/10 group transition-all hover:bg-tertiary">
+                    <div class="w-16 h-16 rounded-xl overflow-hidden bg-primary/10 border border-primary/20 flex-shrink-0 flex items-center justify-center">
+                        <i data-lucide="${icon}" class="w-7 h-7 text-primary"></i>
                     </div>
                     <div class="flex-grow">
-                        <h5 class="font-display font-bold text-sm text-white">${product.name}</h5>
+                        <h5 class="font-display font-bold text-sm text-dark">${product.name}</h5>
                         <p class="text-textSec text-xs">${product.subtitle}</p>
                         <div class="flex items-center justify-between mt-2">
-                            <span class="font-bold text-sm text-primary">$${product.price}</span>
+                            <span class="font-bold text-sm text-primary">$${product.price.toLocaleString('es-AR')}</span>
                             <!-- Qty Controls -->
-                            <div class="flex items-center gap-2 bg-black/40 border border-white/10 px-2 py-1 rounded-full">
+                            <div class="flex items-center gap-2 bg-tertiary border border-black/10 px-2 py-1 rounded-full">
                                 <button class="qty-btn dec-qty hover:text-primary transition-colors text-xs" data-id="${item.id}">
                                     <i data-lucide="minus" class="w-3 h-3"></i>
                                 </button>
@@ -171,14 +172,14 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                         </div>
                     </div>
-                    <button class="remove-item p-2 text-white/30 hover:text-red-500 hover:bg-red-500/10 rounded-full transition-all" data-id="${item.id}">
+                    <button class="remove-item p-2 text-dark/30 hover:text-red-500 hover:bg-red-500/10 rounded-full transition-all" data-id="${item.id}">
                         <i data-lucide="trash-2" class="w-4 h-4"></i>
                     </button>
                 </div>
             `;
         }).join('');
 
-        cartSubtotal.textContent = `$${subtotal}`;
+        cartSubtotal.textContent = `$${subtotal.toLocaleString('es-AR')}`;
         
         // Re-init icons for dynamic HTML content
         if (window.lucide) {
@@ -251,11 +252,23 @@ document.addEventListener('DOMContentLoaded', () => {
         modalQuantity = 1;
 
         // Populate Modal Fields
-        if (modalImg) modalImg.src = product.image;
+        if (modalImg) {
+            const icon = product.icon || (window.CATEGORY_ICONS && window.CATEGORY_ICONS[product.category]) || 'package';
+            modalImg.style.display = 'none';
+            const imgContainer = modalImg.parentElement;
+            let iconEl = imgContainer.querySelector('.modal-icon-placeholder');
+            if (!iconEl) {
+                iconEl = document.createElement('div');
+                iconEl.className = 'modal-icon-placeholder absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/10 to-tertiary';
+                imgContainer.appendChild(iconEl);
+            }
+            iconEl.innerHTML = `<div class="w-24 h-24 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center"><i data-lucide="${icon}" class="w-12 h-12 text-primary"></i></div>`;
+            if (window.lucide) window.lucide.createIcons();
+        }
         if (modalName) modalName.textContent = product.name;
         if (modalSubtitle) modalSubtitle.textContent = product.subtitle;
         if (modalDesc) modalDesc.textContent = product.description;
-        if (modalPrice) modalPrice.textContent = `$${product.price}`;
+        if (modalPrice) modalPrice.textContent = `$${product.price.toLocaleString('es-AR')}`;
         if (modalQtyVal) modalQtyVal.textContent = modalQuantity;
 
         if (modalBadge) {
@@ -290,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function checkoutCart() {
         if (cart.length === 0) return;
 
-        let message = `¡Hola BEACON! Me interesa comprar los siguientes productos de tecnología premium:\n\n`;
+        let message = `¡Hola BEACON! Me interesa cotizar los siguientes productos de sublimado y diseño:\n\n`;
         let total = 0;
 
         cart.forEach(item => {
@@ -298,11 +311,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (product) {
                 const itemTotal = product.price * item.quantity;
                 total += itemTotal;
-                message += `• ${item.quantity}x ${product.name} - $${product.price} c/u ($${itemTotal})\n`;
+                message += `• ${item.quantity}x ${product.name} - $${product.price.toLocaleString('es-AR')} c/u ($${itemTotal.toLocaleString('es-AR')})\n`;
             }
         });
 
-        message += `\n*Total del Pedido: $${total}*\n\nPor favor, confírmenme la disponibilidad y los pasos para coordinar la entrega gratuita. ¡Gracias!`;
+        message += `\n*Total del Pedido: $${total.toLocaleString('es-AR')}*\n\nPor favor, confírmenme la disponibilidad y los pasos para coordinar la entrega. ¡Gracias!`;
 
         const encodedMessage = encodeURIComponent(message);
         const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;

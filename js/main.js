@@ -96,7 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Hero Parallax & Blur out
+
+
+    // Hero Parallax
     gsap.to('#hero-bg', {
         scrollTrigger: {
             trigger: '#hero',
@@ -104,20 +106,52 @@ document.addEventListener('DOMContentLoaded', () => {
             end: 'bottom top',
             scrub: true
         },
-        y: 200,
-        filter: 'blur(10px)',
-        opacity: 0.3
+        y: 250
     });
 
-    // Navbar blur on scroll
+    // Navbar behavior (glassmorphism scroll transition with dynamic text color)
     const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('backdrop-blur-xl', 'bg-black/50', 'border-b', 'border-white/10');
-        } else {
-            navbar.classList.remove('backdrop-blur-xl', 'bg-black/50', 'border-b', 'border-white/10');
-        }
-    });
+    const navLogo = document.getElementById('nav-logo');
+    const navLinks = document.getElementById('nav-links');
+    const cartBtn = document.getElementById('cart-btn');
+
+    if (navbar) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-background/85', 'backdrop-blur-lg', 'border-black/5', 'shadow-sm', 'py-2', 'md:py-3');
+                navbar.classList.remove('bg-transparent', 'border-transparent', 'py-3', 'md:py-5');
+                
+                if (navLogo) {
+                    navLogo.classList.remove('text-white');
+                    navLogo.classList.add('text-dark');
+                }
+                if (navLinks) {
+                    navLinks.classList.remove('text-white/80');
+                    navLinks.classList.add('text-textSec');
+                }
+                if (cartBtn) {
+                    cartBtn.classList.remove('text-white', 'hover:bg-white/10');
+                    cartBtn.classList.add('text-dark', 'hover:bg-black/5');
+                }
+            } else {
+                navbar.classList.remove('bg-background/85', 'backdrop-blur-lg', 'border-black/5', 'shadow-sm', 'py-2', 'md:py-3');
+                navbar.classList.add('bg-transparent', 'border-transparent', 'py-3', 'md:py-5');
+                
+                if (navLogo) {
+                    navLogo.classList.remove('text-dark');
+                    navLogo.classList.add('text-white');
+                }
+                if (navLinks) {
+                    navLinks.classList.remove('text-textSec');
+                    navLinks.classList.add('text-white/80');
+                }
+                if (cartBtn) {
+                    cartBtn.classList.remove('text-dark', 'hover:bg-black/5');
+                    cartBtn.classList.add('text-white', 'hover:bg-white/10');
+                }
+            }
+        });
+    }
 
     // Scroll Indicator Line Anim
     gsap.to('.scroll-line-anim', {
@@ -131,81 +165,81 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Timeline Progress Animation
     const timelineSteps = gsap.utils.toArray('.timeline-step');
+    const timelineProgress = document.getElementById('timeline-progress');
+    const timelineSection = document.getElementById('metodologia');
     
-    // Line fill
-    gsap.to('#timeline-progress', {
-        scrollTrigger: {
-            trigger: '#metodologia',
-            start: "top 60%",
-            end: "bottom 80%",
-            scrub: 1
-        },
-        height: "100%",
-        ease: "none"
-    });
+    if (timelineSection && timelineProgress && timelineSteps.length > 0) {
+        let mm = gsap.matchMedia();
+        
+        // Desktop: Horizontal Line
+        mm.add("(min-width: 768px)", () => {
+            gsap.fromTo(timelineProgress, 
+                { width: "0%", height: "100%" },
+                {
+                    width: "100%",
+                    height: "100%",
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: timelineSection,
+                        start: "top 80%",
+                        end: "bottom 80%",
+                        scrub: 1
+                    }
+                }
+            );
+        });
 
-    // Dots and Content reveal
-    timelineSteps.forEach((step) => {
-        const dot = step.querySelector('.step-dot');
-        const innerDot = step.querySelector('.dot-inner');
-        const content = step.querySelector('.glass-panel');
+        // Mobile: Vertical Line
+        mm.add("(max-width: 767px)", () => {
+            gsap.fromTo(timelineProgress, 
+                { height: "0%", width: "100%" },
+                {
+                    height: "100%",
+                    width: "100%",
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: timelineSection,
+                        start: "top 80%",
+                        end: "bottom 80%",
+                        scrub: 1
+                    }
+                }
+            );
+        });
 
-        // Light up dot
-        gsap.to(innerDot, {
-            scrollTrigger: {
-                trigger: step,
-                start: "top 75%",
-                toggleClass: "opacity-100",
-                onEnter: () => dot.classList.add('border-primary'),
-                onLeaveBack: () => dot.classList.remove('border-primary')
+        // Dots and Content reveal
+        timelineSteps.forEach((step) => {
+            const dot = step.querySelector('.step-dot');
+            const innerDot = step.querySelector('.dot-inner');
+            const content = step.querySelector('.bg-transparent');
+
+            if (content) {
+                // Light up dot and reveal card synced with timeline progress
+                gsap.fromTo(content, 
+                    { y: 30, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.8,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: step,
+                            start: "top 80%",
+                            onEnter: () => {
+                                if (innerDot) innerDot.classList.remove('opacity-0');
+                                if (dot) dot.classList.add('border-primary');
+                            },
+                            onLeaveBack: () => {
+                                if (innerDot) innerDot.classList.add('opacity-0');
+                            }
+                        }
+                    }
+                );
             }
         });
+    }
 
-        // Reveal content
-        gsap.from(content, {
-            scrollTrigger: {
-                trigger: step,
-                start: "top 85%",
-            },
-            y: 30,
-            opacity: 0,
-            duration: 0.8,
-            ease: "power2.out"
-        });
-    });
 
-    // Animated Pie Charts & Counters
-    const charts = document.querySelectorAll('.pie-progress');
-    charts.forEach(chart => {
-        ScrollTrigger.create({
-            trigger: chart.closest('.glass-panel'),
-            start: "top 85%",
-            once: true,
-            onEnter: () => {
-                // SVG Ring animation
-                const targetPercent = +chart.getAttribute('data-percent');
-                const circumference = 283; // 2 * pi * r (45)
-                const offset = circumference - (targetPercent / 100) * circumference;
-                
-                gsap.to(chart, {
-                    strokeDashoffset: offset,
-                    duration: 2,
-                    ease: "power2.out",
-                    delay: 0.2
-                });
-
-                // Number animation
-                const counter = chart.closest('.glass-panel').querySelector('.counter');
-                gsap.to(counter, {
-                    innerHTML: targetPercent,
-                    duration: 2,
-                    snap: { innerHTML: 1 },
-                    ease: "power2.out",
-                    delay: 0.2
-                });
-            }
-        });
-    });
 
     // 6. Swiper Initializations
     
@@ -246,19 +280,6 @@ document.addEventListener('DOMContentLoaded', () => {
             768: { slidesPerView: 2.2, spaceBetween: 30 },
             1024: { slidesPerView: 3.2, spaceBetween: 30 },
             1440: { slidesPerView: 4.2, spaceBetween: 40 }
-        },
-        on: {
-            slideChangeTransitionStart: function () {
-                document.querySelectorAll('.testimonial-card').forEach(el => {
-                    el.classList.remove('opacity-100', 'scale-100', 'border-primary/50');
-                    el.classList.add('opacity-50', 'scale-90');
-                });
-                const activeSlide = this.slides[this.activeIndex].querySelector('.testimonial-card');
-                if(activeSlide) {
-                    activeSlide.classList.remove('opacity-50', 'scale-90');
-                    activeSlide.classList.add('opacity-100', 'scale-100', 'border-primary/50');
-                }
-            }
         }
     });
 
@@ -323,27 +344,255 @@ document.addEventListener('DOMContentLoaded', () => {
         const activeBtn = document.querySelector('.tab-btn.active-tab') || tabBtns[0];
         updateIndicator(activeBtn);
     });
+
+    // 8. History Accordion Logic with GSAP
+    const accordionHeaders = document.querySelectorAll('#history-accordion .accordion-header');
+    
+    // Initial setup for accordion
+    document.querySelectorAll('#history-accordion .accordion-item').forEach(item => {
+        const content = item.querySelector('.accordion-content');
+        const progress = item.querySelector('.accordion-progress');
+        
+        if (item.classList.contains('is-open')) {
+            gsap.set(content, { height: 'auto' });
+            gsap.to(progress, { width: progress.getAttribute('data-width'), duration: 1, ease: "power2.out", delay: 0.2 });
+        } else {
+            gsap.set(content, { height: 0 });
+            gsap.set(progress, { width: 0 });
+        }
+    });
+
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const item = header.parentElement;
+            const content = item.querySelector('.accordion-content');
+            const progress = item.querySelector('.accordion-progress');
+            const iconBg = item.querySelector('.accordion-icon-bg');
+            const icon = item.querySelector('.accordion-chevron');
+            const title = item.querySelector('.accordion-title');
+            const isOpen = item.classList.contains('is-open');
+
+            if (isOpen) return; // Enforce one always open
+
+            // Close all others
+            document.querySelectorAll('#history-accordion .accordion-item.is-open').forEach(openItem => {
+                openItem.classList.remove('is-open');
+                const openContent = openItem.querySelector('.accordion-content');
+                const openProgress = openItem.querySelector('.accordion-progress');
+                const openIconBg = openItem.querySelector('.accordion-icon-bg');
+                const openIcon = openItem.querySelector('.accordion-chevron');
+                const openTitle = openItem.querySelector('.accordion-title');
+
+                gsap.to(openContent, { height: 0, duration: 0.4, ease: "power2.inOut" });
+                gsap.to(openProgress, { width: 0, duration: 0.3, ease: "power2.inOut" });
+                openIconBg.classList.replace('bg-primary', 'bg-primary/10');
+                openIconBg.classList.replace('text-white', 'text-primary');
+                openIcon.classList.remove('rotate-180');
+                openTitle.classList.remove('text-primary');
+            });
+
+            // Open clicked
+            item.classList.add('is-open');
+            gsap.to(content, { height: 'auto', duration: 0.4, ease: "power2.inOut" });
+            gsap.to(progress, { width: progress.getAttribute('data-width'), duration: 0.8, ease: "power2.out", delay: 0.2 });
+            
+            iconBg.classList.replace('bg-primary/10', 'bg-primary');
+            iconBg.classList.replace('text-primary', 'text-white');
+            icon.classList.add('rotate-180');
+            title.classList.add('text-primary');
+        });
+    });
+
+    // 9. About Parallax Effect
+    const aboutImg = document.getElementById('about-parallax-img');
+    const aboutSection = document.getElementById('nosotros');
+    if (aboutImg && aboutSection) {
+        gsap.to(aboutImg, {
+            yPercent: 10,
+            ease: "none",
+            scrollTrigger: {
+                trigger: aboutSection,
+                start: "top top",
+                end: "+=120%",
+                scrub: true
+            }
+        });
+    }
+
+    // 10. Title Animations
+    if (typeof TextPlugin !== 'undefined') {
+        gsap.registerPlugin(TextPlugin);
+    }
+
+    // Nuestros Servicios: underline loop
+    const underlineServicios = document.getElementById('servicios-underline');
+    if (underlineServicios) {
+        gsap.to(underlineServicios, {
+            scaleX: 1,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: '#title-servicios',
+                start: "top 80%"
+            },
+            onComplete: () => {
+                gsap.to(underlineServicios, {
+                    scaleX: 0,
+                    transformOrigin: "right",
+                    duration: 0.8,
+                    delay: 2,
+                    ease: "power2.inOut",
+                    repeat: -1,
+                    yoyo: true,
+                    repeatDelay: 2
+                });
+            }
+        });
+    }
+
+    // Destacados: Rotate D and turn orange
+    const dDestacados = document.getElementById('destacados-d');
+    if (dDestacados) {
+        gsap.to(dDestacados, {
+            rotateY: 360,
+            color: "#FF5C2D",
+            duration: 1.5,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: '#title-destacados',
+                start: "top 80%"
+            }
+        });
+    }
+
+    // Catálogo Completo: Fade in up
+    const titleCatalogo = document.getElementById('title-catalogo');
+    if (titleCatalogo) {
+        gsap.to(titleCatalogo, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: titleCatalogo,
+                start: "top 85%"
+            }
+        });
+    }
+
+    // Metodología: Word Reveal
+    if (typeof SplitType !== 'undefined' && document.getElementById('title-metodologia')) {
+        const titleMetodologia = new SplitType('#title-metodologia', { types: 'words' });
+        gsap.set(titleMetodologia.words, { opacity: 0, y: 20 });
+        gsap.to(titleMetodologia.words, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.05,
+            ease: "back.out(1.5)",
+            scrollTrigger: {
+                trigger: '#title-metodologia',
+                start: "top 85%"
+            }
+        });
+    }
+
+    // 11. Bento Grid: Animation & Movement on scroll
+    gsap.utils.toArray('.bento-item').forEach((item) => {
+        gsap.fromTo(item, 
+            { opacity: 0, y: 60, scale: 0.95 },
+            {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.8,
+                ease: "back.out(1.2)",
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+    });
+
+    // 12. Equipo Cards Blur Reveal
+    gsap.fromTo('.equipo-card', 
+        { filter: 'blur(20px)', opacity: 0, y: 30 },
+        {
+            filter: 'blur(0px)',
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            stagger: 0.2,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: "#equipo-grid",
+                start: "top 80%"
+            }
+        }
+    );
+
+    // 13. Sobre Nosotros Word Reveal
+    if (typeof SplitType !== 'undefined' && document.getElementById('sobre-nosotros-title')) {
+        const titleSobreNosotros = new SplitType('#sobre-nosotros-title', { types: 'words' });
+        
+        // Prevent layout shift by making container visible but content hidden initially
+        gsap.set(titleSobreNosotros.words, { opacity: 0, y: 20 });
+        
+        gsap.to(titleSobreNosotros.words, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.05,
+            ease: "back.out(1.5)",
+            scrollTrigger: {
+                trigger: '#sobre-nosotros-title',
+                start: "top 85%"
+            }
+        });
+    }
+
 });
 
 // Dynamic Products Renderers
+function getProductIcon(product) {
+    return product.icon || window.CATEGORY_ICONS[product.category] || 'package';
+}
+
+function renderProductVisual(product, size = 'lg') {
+    const icon = getProductIcon(product);
+    const sizeClasses = size === 'lg'
+        ? 'h-[450px] md:h-[550px]'
+        : 'h-48';
+    const iconSize = size === 'lg' ? 'w-20 h-20' : 'w-12 h-12';
+    return `
+        <div class="absolute inset-0 w-full ${sizeClasses} bg-gradient-to-br from-primary/10 via-tertiary to-background flex items-center justify-center">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
+                <i data-lucide="${icon}" class="${iconSize} text-primary"></i>
+            </div>
+        </div>
+    `;
+}
+
 function renderFeaturedSlider() {
     const wrapper = document.querySelector('.products-slider .swiper-wrapper');
     if (!wrapper) return;
     
     wrapper.innerHTML = window.PRODUCTS.map(product => {
-        const badgeHtml = product.badge ? `<div class="absolute top-6 left-6 bg-primary text-black text-xs font-bold px-4 py-1.5 rounded-full z-10">${product.badge}</div>` : '';
+        const badgeHtml = product.badge ? `<div class="absolute top-6 left-6 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-full z-10">${product.badge}</div>` : '';
         return `
             <div class="swiper-slide w-[300px] md:w-[450px]">
-                <div class="relative w-full h-[450px] md:h-[550px] overflow-hidden rounded-[30px] group hover-target">
-                    <img src="${product.image}" alt="${product.name}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer" onclick="openProductModal('${product.id}')"></div>
+                <div class="relative w-full h-[450px] md:h-[550px] overflow-hidden rounded-[30px] group hover-target spotlight-card">
+                    ${renderProductVisual(product, 'lg')}
+                    <div class="spotlight-card absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer" onclick="openProductModal('${product.id}')"></div>
                     ${badgeHtml}
                     <div class="absolute bottom-0 left-0 w-full p-8 text-left translate-y-4 group-hover:translate-y-0 transition-transform duration-500 z-10 pointer-events-none">
                         <span class="text-primary text-xs font-semibold tracking-wider uppercase mb-2 block">${product.subtitle}</span>
                         <h3 class="text-3xl font-display font-bold mb-2 text-white">${product.name}</h3>
                         <div class="flex items-center justify-between mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 pointer-events-auto">
-                            <span class="text-2xl font-medium text-white">$${product.price}</span>
-                            <button onclick="openProductModal('${product.id}')" class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center hover:bg-primary hover:text-black transition-colors">
+                            <span class="text-2xl font-medium text-white">$${product.price.toLocaleString('es-AR')}</span>
+                            <button onclick="openProductModal('${product.id}')" class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
                                 <i data-lucide="plus"></i>
                             </button>
                         </div>
@@ -352,6 +601,8 @@ function renderFeaturedSlider() {
             </div>
         `;
     }).join('');
+
+    if (window.lucide) window.lucide.createIcons();
 }
 
 function renderCatalogGrid() {
@@ -359,21 +610,24 @@ function renderCatalogGrid() {
     if (!grid) return;
     
     grid.innerHTML = window.PRODUCTS.map(product => {
+        const icon = getProductIcon(product);
         return `
             <div class="glass-panel p-3 rounded-[20px] group catalog-item hover-target spotlight-card animate-grid" data-category="${product.category}">
                 <div class="spotlight-content flex flex-col h-full">
-                    <div class="w-full h-48 rounded-[12px] overflow-hidden mb-4 bg-white/5 relative cursor-pointer" onclick="openProductModal('${product.id}')">
-                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="w-full h-48 rounded-[12px] overflow-hidden mb-4 bg-gradient-to-br from-primary/10 to-tertiary relative cursor-pointer flex items-center justify-center" onclick="openProductModal('${product.id}')">
+                        <div class="w-16 h-16 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                            <i data-lucide="${icon}" class="w-8 h-8 text-primary"></i>
+                        </div>
                     </div>
                     <h4 class="font-display font-bold text-lg leading-tight cursor-pointer" onclick="openProductModal('${product.id}')">${product.name}</h4>
                     <p class="text-textSec text-xs mb-4 mt-1">${product.subtitle}</p>
-                    <div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center">
+                    <div class="mt-auto pt-4 border-t border-black/5 flex justify-between items-center">
                         <div class="flex flex-col">
                             <span class="text-textSec text-[10px] uppercase tracking-wider">Precio</span>
-                            <span class="font-bold text-lg text-white">$${product.price}</span>
+                            <span class="font-bold text-lg text-dark">$${product.price.toLocaleString('es-AR')}</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <button onclick="openProductModal('${product.id}')" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary hover:text-black transition-colors">
+                            <button onclick="openProductModal('${product.id}')" class="w-8 h-8 rounded-full bg-black/10 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
                                 <i data-lucide="plus" class="w-4 h-4"></i>
                             </button>
                         </div>
@@ -382,4 +636,6 @@ function renderCatalogGrid() {
             </div>
         `;
     }).join('');
+
+    if (window.lucide) window.lucide.createIcons();
 }
