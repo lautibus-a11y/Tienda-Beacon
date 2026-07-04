@@ -186,15 +186,15 @@ document.addEventListener('DOMContentLoaded', () => {
             window.lucide.createIcons();
         }
 
-        // Attach listeners for dynamic elements
-        attachCartItemListeners();
     }
 
-    // Listeners for quantity controls and removal
-    function attachCartItemListeners() {
-        document.querySelectorAll('.dec-qty').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const id = btn.getAttribute('data-id');
+    // Event delegation for quantity controls and removal in cart
+    if (cartItemsContainer) {
+        cartItemsContainer.addEventListener('click', (e) => {
+            // Dec button
+            const decBtn = e.target.closest('.dec-qty');
+            if (decBtn) {
+                const id = decBtn.getAttribute('data-id');
                 const item = cart.find(item => item.id === id);
                 if (item) {
                     if (item.quantity > 1) {
@@ -204,26 +204,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     updateCart();
                 }
-            });
-        });
+                return;
+            }
 
-        document.querySelectorAll('.inc-qty').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const id = btn.getAttribute('data-id');
+            // Inc button
+            const incBtn = e.target.closest('.inc-qty');
+            if (incBtn) {
+                const id = incBtn.getAttribute('data-id');
                 const item = cart.find(item => item.id === id);
                 if (item) {
                     item.quantity++;
                     updateCart();
                 }
-            });
-        });
+                return;
+            }
 
-        document.querySelectorAll('.remove-item').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const id = btn.getAttribute('data-id');
+            // Remove button
+            const removeBtn = e.target.closest('.remove-item');
+            if (removeBtn) {
+                const id = removeBtn.getAttribute('data-id');
                 cart = cart.filter(item => item.id !== id);
                 updateCart();
-            });
+                return;
+            }
         });
     }
 

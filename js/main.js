@@ -22,12 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
         infinite: false,
     });
 
-    function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
     // Sync GSAP with Lenis
     gsap.registerPlugin(ScrollTrigger);
     lenis.on('scroll', ScrollTrigger.update);
@@ -450,7 +444,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Destacados: Rotate D and turn orange
+    // Destacados: Rotate D and turn orange in an infinite loop
     const dDestacados = document.getElementById('destacados-d');
     if (dDestacados) {
         gsap.to(dDestacados, {
@@ -461,12 +455,24 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollTrigger: {
                 trigger: '#title-destacados',
                 start: "top 80%"
+            },
+            onComplete: () => {
+                // Loop the rotation back and forth with delay
+                gsap.to(dDestacados, {
+                    rotateY: -360,
+                    duration: 1.5,
+                    ease: "power2.inOut",
+                    repeat: -1,
+                    yoyo: true,
+                    repeatDelay: 2
+                });
             }
         });
     }
 
-    // Catálogo Completo: Fade in up
+    // Catálogo Completo: Fade in up + O jump & color loop
     const titleCatalogo = document.getElementById('title-catalogo');
+    const catalogoO = document.getElementById('catalogo-o');
     if (titleCatalogo) {
         gsap.to(titleCatalogo, {
             opacity: 1,
@@ -476,20 +482,40 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollTrigger: {
                 trigger: titleCatalogo,
                 start: "top 85%"
+            },
+            onComplete: () => {
+                if (catalogoO) {
+                    const tl = gsap.timeline({ repeat: -1 });
+                    tl.to(catalogoO, {
+                        y: -12,
+                        color: "#FF5C2D",
+                        duration: 0.35,
+                        ease: "power1.out"
+                    })
+                    .to(catalogoO, {
+                        y: 0,
+                        color: "#2C2C2C",
+                        duration: 0.45,
+                        ease: "bounce.out"
+                    })
+                    .to(catalogoO, {
+                        duration: 2.0 // delay between jumps
+                    });
+                }
             }
         });
     }
 
-    // Metodología: Word Reveal
+    // Metodología: Word Reveal (Title + Description)
     if (typeof SplitType !== 'undefined' && document.getElementById('title-metodologia')) {
-        const titleMetodologia = new SplitType('#title-metodologia', { types: 'words' });
-        gsap.set(titleMetodologia.words, { opacity: 0, y: 20 });
-        gsap.to(titleMetodologia.words, {
+        const textMetodologia = new SplitType('#title-metodologia, #desc-metodologia', { types: 'words' });
+        gsap.set(textMetodologia.words, { opacity: 0, y: 20 });
+        gsap.to(textMetodologia.words, {
             opacity: 1,
             y: 0,
             duration: 0.8,
-            stagger: 0.05,
-            ease: "back.out(1.5)",
+            stagger: 0.02,
+            ease: "power2.out",
             scrollTrigger: {
                 trigger: '#title-metodologia',
                 start: "top 85%"
@@ -553,6 +579,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 13.5 Nuestra Historia Word Reveal
+    if (typeof SplitType !== 'undefined' && document.getElementById('title-historia-main')) {
+        const textHistoria = new SplitType('#title-historia-sub, #title-historia-main', { types: 'words' });
+        gsap.set(textHistoria.words, { opacity: 0, y: 20 });
+        gsap.to(textHistoria.words, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.03,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: '#title-historia-main',
+                start: "top 85%"
+            }
+        });
+    }
 });
 
 // Dynamic Products Renderers

@@ -112,6 +112,8 @@ html.lenis {
 .marquee-content {
     display: flex;
     flex-shrink: 0;
+    min-width: 100%;
+    justify-content: space-around;
     gap: 3rem;
     padding-right: 3rem;
     animation: marquee 25s linear infinite;
@@ -222,14 +224,7 @@ html.lenis {
 }
 
 /* Timeline */
-.timeline-line {
-    width: 2px;
-    background: rgba(0, 0, 0, 0.08);
-    position: absolute;
-    left: 24px;
-    top: 0;
-    bottom: 0;
-}
+
 .timeline-progress {
     width: 100%;
     background: var(--primary);

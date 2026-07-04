@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="BEACON - Sublimación, diseño gráfico y estampado personalizado en CABA. Remeras full print, tazas, vinilos y papelería corporativa premium.">
     <title>Beacon | Sublimación & Diseño</title>
     
     <!-- Fonts -->
@@ -275,7 +276,7 @@
     <section class="py-16 md:py-24 relative z-10" id="productos">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
-                <h2 class="text-3xl md:text-5xl font-display font-bold mb-6 opacity-0 translate-y-8" id="title-catalogo">Catálogo Completo</h2>
+                <h2 class="text-3xl md:text-5xl font-display font-bold mb-6 opacity-0 translate-y-8" id="title-catalogo">Catálogo Complet<span id="catalogo-o" class="inline-block">o</span></h2>
                 
                 <!-- Glass Tabs -->
                 <div class="inline-flex glass p-1 rounded-full relative overflow-x-auto hide-scroll max-w-full">
@@ -334,8 +335,8 @@
             <div class="mx-auto max-w-6xl px-6 w-full" id="about-reveal-card">
                 <div class="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-14 items-center">
                     <div>
-                        <p class="text-primary text-xs font-semibold uppercase tracking-[0.35em] mb-4">Nuestra historia</p>
-                        <h3 class="text-3xl md:text-4xl font-display font-bold mb-6 leading-tight">Diseño premium, producción ágil y una relación cercana con cada cliente.</h3>
+                        <p class="text-primary text-xs font-semibold uppercase tracking-[0.35em] mb-4" id="title-historia-sub">Nuestra historia</p>
+                        <h3 class="text-3xl md:text-4xl font-display font-bold mb-6 leading-tight" id="title-historia-main">Diseño premium, producción ágil y una relación cercana con cada cliente.</h3>
                         <p class="text-textSec text-base md:text-lg leading-relaxed mb-4">
                             <span class="text-primary font-bold">En BEACON</span> transformamos ideas en piezas que se ven bien, se sienten bien y dejan impresión. Combinamos diseño gráfico, sublimación, estampado y producción personalizada.
                         </p>
@@ -477,7 +478,7 @@
         <div class="max-w-7xl mx-auto px-6 text-center">
             <p class="text-primary text-xs font-semibold uppercase tracking-[0.35em] mb-4">¿Cómo trabajamos?</p>
             <h2 class="text-3xl md:text-5xl font-display font-bold mb-4 min-h-[1.2em]" id="title-metodologia">Metodología de trabajo</h2>
-            <p class="text-textSec text-lg max-w-2xl mx-auto">Un proceso claro, ágil y transparente para que recibas exactamente lo que esperás, en tiempo y forma.</p>
+            <p class="text-textSec text-lg max-w-2xl mx-auto" id="desc-metodologia">Un proceso claro, ágil y transparente para que recibas exactamente lo que esperás, en tiempo y forma.</p>
         </div>
 
             <div class="relative mt-8">
@@ -613,22 +614,82 @@
                         </div>
                     </div>
                 </div>
+                <!-- Duplicate slides for Swiper Loop support on large viewports -->
+                <div class="swiper-slide">
+                    <div class="glass-panel p-8 rounded-3xl">
+                        <div class="flex gap-1 text-primary mb-6">
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                        </div>
+                        <p class="text-lg md:text-xl font-medium mb-8">"Transformaron nuestro diseño en remeras y tazas con una calidad impresionante. Todo salió perfecto para la fecha del evento."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-semibold">ER</div>
+                            <div>
+                                <h5 class="font-bold">Elena R.</h5>
+                                <p class="text-xs text-textSec">Marca de eventos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="glass-panel p-8 rounded-3xl">
+                        <div class="flex gap-1 text-primary mb-6">
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                        </div>
+                        <p class="text-lg md:text-xl font-medium mb-8">"Nos ayudaron a darle una identidad visual fuerte a nuestra colección. Los colores y el acabado quedaron impecables."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-semibold">MT</div>
+                            <div>
+                                <h5 class="font-bold">Marcos T.</h5>
+                                <p class="text-xs text-textSec">Club deportivo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="glass-panel p-8 rounded-3xl">
+                        <div class="flex gap-1 text-primary mb-6">
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                        </div>
+                        <p class="text-lg md:text-xl font-medium mb-8">"Excelente predisposición y rapidez. Los buzos de egresados quedaron tal cual los soñamos. 100% recomendados."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-semibold">SL</div>
+                            <div>
+                                <h5 class="font-bold">Sofía L.</h5>
+                                <p class="text-xs text-textSec">Emprendedora</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="swiper-pagination !-bottom-2"></div>
         </div>
     </section>
 
     <!-- 8. CTA Premium (Section Overlap) -->
-    <section class="section-overlap bg-tertiary py-32 relative z-20 overflow-hidden border-t border-black/10" id="cta-section">
+    <section class="section-overlap bg-[#121212] py-32 relative z-20 overflow-hidden border-t border-white/10" id="cta-section">
         <!-- Background Video -->
-        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none" id="cta-video">
+        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-90 pointer-events-none" id="cta-video">
             <source src="assets/videos/videocrlbucle.mp4" type="video/mp4">
         </video>
+        <!-- Dark Overlay matching Hero opacity -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/55 to-black/80 z-[1] backdrop-blur-[1px]"></div>
         <!-- Glow orb behind -->
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] pointer-events-none z-[2]"></div>
         
-        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-            <h2 class="text-4xl md:text-7xl font-display font-bold mb-10 split-text">
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10 text-white">
+            <h2 class="text-4xl md:text-7xl font-display font-bold mb-10 split-text text-white">
                 Elevá tu <br/> Estándar.
             </h2>
             <div class="reveal-up">
@@ -693,9 +754,9 @@
                     </div>
                     
                     <div class="mt-12 pt-8 border-t border-black/10 flex gap-4">
-                        <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center hover:bg-primary hover:text-white transition-colors hover-target"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-                        <a href="https://linkedin.com" target="_blank" class="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center hover:bg-primary hover:text-white transition-colors hover-target"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-                        <a href="https://x.com" target="_blank" class="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center hover:bg-primary hover:text-white transition-colors hover-target"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center hover:bg-primary hover:text-white transition-colors hover-target"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center hover:bg-primary hover:text-white transition-colors hover-target"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                        <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center hover:bg-primary hover:text-white transition-colors hover-target"><i data-lucide="twitter" class="w-5 h-5"></i></a>
                     </div>
                 </div>
 
@@ -724,16 +785,16 @@
                         <i data-lucide="hexagon" class="text-primary"></i>
                         BEACON<span class="text-primary">.</span>
                     </a>
-                    <p class="text-textSec text-sm">Ingeniería premium para una nueva era de interacción digital.</p>
+                    <p class="text-textSec text-sm">Diseño premium y sublimación de alta calidad para destacar la identidad de tu marca.</p>
                 </div>
                 
                 <div>
                     <h4 class="font-bold mb-6 uppercase tracking-wider text-sm">Productos</h4>
                     <ul class="space-y-4 text-sm text-textSec">
-                        <li><a href="#productos" class="hover:text-primary transition-colors hover-target">Audio Spatial</a></li>
-                        <li><a href="#productos" class="hover:text-primary transition-colors hover-target">Wearables</a></li>
-                        <li><a href="#productos" class="hover:text-primary transition-colors hover-target">Visión Holográfica</a></li>
-                        <li><a href="#productos" class="hover:text-primary transition-colors hover-target">Hogar Inteligente</a></li>
+                        <li><a href="#productos" class="hover:text-primary transition-colors hover-target">Indumentaria</a></li>
+                        <li><a href="#productos" class="hover:text-primary transition-colors hover-target">Tazas & Mates</a></li>
+                        <li><a href="#productos" class="hover:text-primary transition-colors hover-target">Vinilos & Calcos</a></li>
+                        <li><a href="#productos" class="hover:text-primary transition-colors hover-target">Papelería & Accesorios</a></li>
                     </ul>
                 </div>
 
@@ -741,7 +802,7 @@
                     <h4 class="font-bold mb-6 uppercase tracking-wider text-sm">Soporte</h4>
                     <ul class="space-y-4 text-sm text-textSec">
                         <li><a href="#contacto" class="hover:text-primary transition-colors hover-target">Centro de Ayuda</a></li>
-                        <li><a href="#beneficios" class="hover:text-primary transition-colors hover-target">Garantía Elite</a></li>
+                        <li><a href="#servicios" class="hover:text-primary transition-colors hover-target">Diseño Personalizado</a></li>
                         <li><a href="#metodologia" class="hover:text-primary transition-colors hover-target">Envíos y Devoluciones</a></li>
                         <li><a href="#contacto" class="hover:text-primary transition-colors hover-target">Contacto</a></li>
                     </ul>
@@ -762,9 +823,9 @@
             <div class="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-black/10 text-xs text-textSec">
                 <p>&copy; 2026 BEACON. Todos los derechos reservados.</p>
                 <div class="flex space-x-6 mt-4 md:mt-0">
-                    <a href="https://instagram.com" target="_blank" class="hover:text-primary transition-colors hover-target"><i data-lucide="instagram" class="w-4 h-4"></i></a>
-                    <a href="https://x.com" target="_blank" class="hover:text-primary transition-colors hover-target"><i data-lucide="twitter" class="w-4 h-4"></i></a>
-                    <a href="https://youtube.com" target="_blank" class="hover:text-primary transition-colors hover-target"><i data-lucide="youtube" class="w-4 h-4"></i></a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors hover-target"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                    <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors hover-target"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors hover-target"><i data-lucide="youtube" class="w-4 h-4"></i></a>
                 </div>
             </div>
         </div>
