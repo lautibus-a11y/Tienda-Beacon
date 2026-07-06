@@ -1,4 +1,4 @@
-// BEACON Main JS Initializer
+// FARO Main JS Initializer
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Dynamic Rendering of Products
     renderFeaturedSlider();

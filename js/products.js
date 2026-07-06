@@ -1,4 +1,4 @@
-// Products Database for BEACON — Sublimación & Diseño
+// Products Database for FARO — Sublimación & Diseño
 window.PRODUCTS = [
     {
         id: "remera-full-print",

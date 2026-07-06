@@ -1,4 +1,4 @@
-// BEACON Cart Controller
+// FARO Cart Controller
 document.addEventListener('DOMContentLoaded', () => {
     // State
     let cart = [];
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Init Cart from LocalStorage
     function initCart() {
-        const storedCart = localStorage.getItem('beacon_cart');
+        const storedCart = localStorage.getItem('faro_cart');
         if (storedCart) {
             try {
                 cart = JSON.parse(storedCart);
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Save to LocalStorage
     function saveCart() {
-        localStorage.setItem('beacon_cart', JSON.stringify(cart));
+        localStorage.setItem('faro_cart', JSON.stringify(cart));
     }
 
     // Toggle Drawer
@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function checkoutCart() {
         if (cart.length === 0) return;
 
-        let message = `¡Hola BEACON! Me interesa cotizar los siguientes productos de sublimado y diseño:\n\n`;
+        let message = `¡Hola FARO! Me interesa cotizar los siguientes productos de sublimado y diseño:\n\n`;
         let total = 0;
 
         cart.forEach(item => {
