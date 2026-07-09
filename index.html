@@ -49,8 +49,21 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
 </head>
-<body class="antialiased bg-[#F9F3E9] selection:bg-primary selection:text-white">
+<body class="antialiased bg-[#F9F3E9] selection:bg-primary selection:text-white overflow-x-hidden no-scroll-preloader">
+
+    <!-- Cinematic Reveal Preloader -->
+    <div id="cinematic-preloader" class="fixed inset-0 z-[9999] bg-white flex items-center justify-center transition-all duration-1000 ease-in-out">
+        <!-- Ambient Orange Glow -->
+        <div class="absolute inset-0 bg-primary/5 backdrop-blur-3xl animate-pulse-slow"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/20 rounded-full blur-[80px] animate-pulse-glow"></div>
+        
+        <!-- Logo -->
+        <img src="assets/images/logo-cabecera.png" alt="Faro Preloader" class="relative z-10 h-20 md:h-28 w-auto object-contain cinematic-logo drop-shadow-2xl">
+    </div>
 
     <!-- Aurora Background -->
     <div class="aurora-bg">
@@ -61,9 +74,8 @@
     <!-- Navigation (Full-width Glassmorphism Header) -->
     <nav class="fixed w-full z-50 top-0 transition-all duration-300 py-3 md:py-5 bg-transparent border-b border-transparent" id="navbar">
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-            <a href="#" class="text-2xl font-display font-bold tracking-tighter flex items-center gap-2 magnetic text-white transition-colors duration-300" id="nav-logo" data-magnetic>
-                <i data-lucide="hexagon" class="text-primary"></i>
-                FARO<span class="text-primary">.</span>
+            <a href="#" class="flex items-center magnetic transition-transform duration-300" id="nav-logo" data-magnetic>
+                <img src="assets/images/logo-cabecera.png" alt="Faro Logo" class="h-10 md:h-12 w-auto object-contain drop-shadow-md">
             </a>
             
             <div class="hidden md:flex space-x-8 text-sm font-medium text-white/80 transition-colors duration-300" id="nav-links">
@@ -73,7 +85,7 @@
                 <a href="#contacto" class="hover:text-primary transition-colors hover-target">Contacto</a>
             </div>
 
-            <div class="flex items-center gap-4 text-white transition-colors duration-300" id="nav-actions">
+            <div class="flex items-center gap-2 md:gap-4 text-white transition-colors duration-300" id="nav-actions">
                 <button id="cart-btn" class="hover-target p-2 rounded-full hover:bg-white/10 transition-colors relative">
                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                     <span id="cart-badge" class="absolute -top-1 -right-1 bg-primary text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden"></span>
@@ -81,12 +93,27 @@
                 <a href="#productos" class="hidden md:inline-flex bg-primary text-white px-5 py-2 rounded-full font-semibold text-sm hover:bg-secondary transition-colors magnetic" data-magnetic>
                     Cotizar
                 </a>
+                <button id="mobile-menu-btn" class="md:hidden hover-target p-2 rounded-full hover:bg-white/10 transition-colors relative z-50">
+                    <i data-lucide="menu" class="w-6 h-6" id="mobile-menu-icon"></i>
+                </button>
             </div>
         </div>
     </nav>
 
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-dark/95 backdrop-blur-xl z-40 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col items-center justify-center space-y-8">
+        <a href="#servicios" class="mobile-link text-2xl font-display text-white hover:text-primary transition-colors">Servicios</a>
+        <a href="#promociones" class="mobile-link text-2xl font-display text-white hover:text-primary transition-colors">Combos</a>
+        <a href="#productos" class="mobile-link text-2xl font-display text-white hover:text-primary transition-colors">Productos</a>
+        <a href="#nosotros" class="mobile-link text-2xl font-display text-white hover:text-primary transition-colors">Nosotros</a>
+        <a href="#contacto" class="mobile-link text-2xl font-display text-white hover:text-primary transition-colors">Contacto</a>
+        <a href="#productos" class="mt-8 bg-primary text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-secondary transition-colors mobile-link">
+            Cotizar
+        </a>
+    </div>
+
     <!-- 1. Hero Cinematic Fullscreen -->
-    <section class="relative h-[100vh] w-full flex items-end pb-[20vh] md:pb-0 md:items-center justify-center overflow-hidden" id="hero">
+    <section class="relative h-[100dvh] lg:h-[100vh] w-full flex items-end pb-[20vh] md:pb-0 md:items-center justify-center overflow-hidden" id="hero">
         <div class="absolute inset-0 w-full h-full" id="hero-bg">
             <video autoplay loop muted playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover opacity-90 scale-105" id="hero-video">
                 <source src="assets/videos/videoherobucle.mp4" type="video/mp4">
@@ -153,7 +180,7 @@
     </section>
 
     <!-- 2.5 Nuestros Servicios (Bento Grid) -->
-    <section class="py-16 md:py-24 relative z-10" id="servicios">
+    <section class="py-12 md:py-24 relative z-10" id="servicios">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-5xl font-display font-bold mb-4 inline-block relative" id="title-servicios">
@@ -166,91 +193,75 @@
             </div>
 
             <div class="bento-grid">
-                <!-- Destacado: Sublimación Textil -->
-                <div class="bento-item bento-span-2 bento-span-2-row bg-black/40 backdrop-blur-sm border border-white/10 text-white p-6 md:p-8 rounded-[24px] md:rounded-[28px] flex flex-col justify-end hover-target spotlight-card relative overflow-hidden group">
+                <!-- Card 1: Web -->
+                <div class="bento-item bento-span-2 bento-span-2-row bg-black/40 backdrop-blur-sm border border-white/10 text-white p-6 md:p-8 rounded-[20px] md:rounded-[28px] flex flex-col justify-between hover-target spotlight-card relative overflow-hidden group">
                     <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
-                        <img src="assets/images/steps/paso1.webp" alt="Sublimación Textil" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                        <img src="assets/images/servicios-imagenes-para-bento/disenio-desarrollo.web.jpeg" alt="Web" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                     </div>
-                    <div class="spotlight-content relative z-10">
-                        <h3 class="text-2xl md:text-3xl font-display font-bold">Sublimación Textil</h3>
+                    <div class="relative z-10 w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-6 text-white group-hover:bg-primary transition-colors duration-300">
+                        <i data-lucide="globe" class="w-7 h-7"></i>
+                    </div>
+                    <div class="spotlight-content relative z-10 mt-auto">
+                        <h3 class="text-2xl md:text-3xl font-display font-bold mb-2">Diseño y Desarrollo Web</h3>
+                        <p class="text-white/80 text-sm md:text-base leading-relaxed mb-6 max-w-sm">Creamos sitios web modernos, rápidos y optimizados para potenciar tu negocio.</p>
+                        <button onclick="openServiceModal('web')" class="inline-flex items-center gap-2 bg-primary/90 hover:bg-primary text-white font-semibold py-2.5 px-5 rounded-xl transition-colors backdrop-blur-sm w-fit">
+                            Ver más <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Estampado DTF -->
-                <div class="bento-item bg-black/40 backdrop-blur-sm border border-white/10 text-white p-5 md:p-6 rounded-[20px] md:rounded-[24px] flex flex-col justify-end hover-target spotlight-card relative overflow-hidden group">
+                <!-- Card 2: Graphic -->
+                <div class="bento-item bento-span-2 bg-black/40 backdrop-blur-sm border border-white/10 text-white p-6 md:p-8 rounded-[20px] md:rounded-[24px] flex flex-col justify-between hover-target spotlight-card relative overflow-hidden group">
                     <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
-                        <img src="assets/images/steps/paso3.webp" alt="Estampado DTF" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                        <img src="assets/images/servicios-imagenes-para-bento/Disenio-grafico.jpeg" alt="Graphic" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                     </div>
-                    <div class="spotlight-content relative z-10">
-                        <h3 class="text-lg font-display font-bold">Estampado DTF</h3>
+                    <div class="relative z-10 w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-4 text-white group-hover:bg-primary transition-colors duration-300">
+                        <i data-lucide="palette" class="w-6 h-6"></i>
+                    </div>
+                    <div class="spotlight-content relative z-10 mt-auto">
+                        <h3 class="text-xl md:text-2xl font-display font-bold mb-2">Diseño Gráfico e Identidad</h3>
+                        <p class="text-white/80 text-sm leading-relaxed mb-4 max-w-sm">Diseñamos la imagen visual de tu marca para destacar frente a la competencia.</p>
+                        <button onclick="openServiceModal('graphic')" class="inline-flex items-center gap-2 bg-white/10 hover:bg-primary border border-white/20 hover:border-transparent text-white font-semibold py-2 px-4 rounded-xl transition-all backdrop-blur-sm w-fit text-sm">
+                            Ver más <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Diseño Gráfico -->
-                <div class="bento-item bg-black/40 backdrop-blur-sm border border-white/10 text-white p-5 md:p-6 rounded-[20px] md:rounded-[24px] flex flex-col justify-end hover-target spotlight-card relative overflow-hidden group">
+                <!-- Card 3: Merch -->
+                <div class="bento-item bg-black/40 backdrop-blur-sm border border-white/10 text-white p-5 md:p-6 rounded-[20px] md:rounded-[24px] flex flex-col justify-between hover-target spotlight-card relative overflow-hidden group">
                     <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
-                        <img src="assets/images/steps/paso2.webp" alt="Diseño Gráfico" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                        <img src="assets/images/servicios-imagenes-para-bento/Sublimacion.jpeg" alt="Merch" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                     </div>
-                    <div class="spotlight-content relative z-10">
-                        <h3 class="text-lg font-display font-bold">Diseño Gráfico</h3>
+                    <div class="relative z-10 w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-4 text-white group-hover:bg-primary transition-colors duration-300">
+                        <i data-lucide="shirt" class="w-5 h-5"></i>
+                    </div>
+                    <div class="spotlight-content relative z-10 mt-auto">
+                        <h3 class="text-lg md:text-xl font-display font-bold mb-2">Sublimación y Merchandising</h3>
+                        <p class="text-white/80 text-xs leading-relaxed mb-4 hidden md:block">Productos personalizados para empresas y comercios.</p>
+                        <button onclick="openServiceModal('merch')" class="inline-flex items-center gap-2 bg-white/10 hover:bg-primary border border-white/20 hover:border-transparent text-white font-semibold py-2 px-4 rounded-xl transition-all backdrop-blur-sm w-fit text-xs md:text-sm">
+                            Ver más <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Vinilos y Calcomanías -->
-                <div class="bento-item bento-span-2-mobile bg-black/40 backdrop-blur-sm border border-white/10 text-white p-5 md:p-6 rounded-[20px] md:rounded-[24px] flex flex-col justify-end hover-target spotlight-card relative overflow-hidden group">
+                <!-- Card 4: Signs -->
+                <div class="bento-item bg-black/40 backdrop-blur-sm border border-white/10 text-white p-5 md:p-6 rounded-[20px] md:rounded-[24px] flex flex-col justify-between hover-target spotlight-card relative overflow-hidden group">
                     <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
-                        <img src="assets/images/steps/paso4.webp" alt="Vinilos & Calcos" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                        <img src="assets/images/servicios-imagenes-para-bento/carteleria.png" alt="Signs" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                     </div>
-                    <div class="spotlight-content relative z-10">
-                        <h3 class="text-lg font-display font-bold">Vinilos & Calcos</h3>
+                    <div class="relative z-10 w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-4 text-white group-hover:bg-primary transition-colors duration-300">
+                        <i data-lucide="signpost" class="w-5 h-5"></i>
                     </div>
-                </div>
-
-                <!-- Papelería Corporativa (Oculto en móvil) -->
-                <div class="bento-item bg-black/40 backdrop-blur-sm border border-white/10 text-white p-5 md:p-6 rounded-[20px] md:rounded-[24px] flex flex-col justify-end hover-target spotlight-card relative overflow-hidden group hidden md:block">
-                    <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
-                        <img src="assets/images/steps/paso2.webp" alt="Papelería Corporativa" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
-                    </div>
-                    <div class="spotlight-content relative z-10 h-full flex flex-col justify-end">
-                        <h3 class="text-lg font-display font-bold">Papelería Corporativa</h3>
-                    </div>
-                </div>
-
-                <!-- Producción Mayorista (Oculto en móvil) -->
-                <div class="bento-item bento-span-2 bg-black/40 backdrop-blur-sm border border-white/10 text-white p-5 md:p-6 rounded-[20px] md:rounded-[24px] flex flex-col justify-end hover-target spotlight-card relative overflow-hidden group hidden md:block">
-                    <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
-                        <img src="assets/images/steps/paso1.webp" alt="Producción por Mayor" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
-                    </div>
-                    <div class="spotlight-content relative z-10 h-full flex flex-col justify-end">
-                        <h3 class="text-lg font-display font-bold">Producción por Mayor</h3>
-                    </div>
-                </div>
-
-                <!-- Grabado Láser (Oculto en móvil) -->
-                <div class="bento-item bg-black/40 backdrop-blur-sm border border-white/10 text-white p-5 md:p-6 rounded-[20px] md:rounded-[24px] flex flex-col justify-end hover-target spotlight-card relative overflow-hidden group hidden md:block">
-                    <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
-                        <img src="assets/images/steps/paso3.webp" alt="Grabado Láser" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
-                    </div>
-                    <div class="spotlight-content relative z-10 h-full flex flex-col justify-end">
-                        <h3 class="text-lg font-display font-bold">Grabado Láser</h3>
-                    </div>
-                </div>
-
-                <!-- Mockups y Pruebas (Oculto en móvil) -->
-                <div class="bento-item bg-black/40 backdrop-blur-sm border border-white/10 text-white p-5 md:p-6 rounded-[20px] md:rounded-[24px] flex flex-col justify-end hover-target spotlight-card relative overflow-hidden group hidden md:block">
-                    <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
-                        <img src="assets/images/steps/paso4.webp" alt="Mockups & Pruebas" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
-                    </div>
-                    <div class="spotlight-content relative z-10 h-full flex flex-col justify-end">
-                        <h3 class="text-lg font-display font-bold">Mockups & Pruebas</h3>
+                    <div class="spotlight-content relative z-10 mt-auto">
+                        <h3 class="text-lg md:text-xl font-display font-bold mb-2">Cartelería Comercial</h3>
+                        <p class="text-white/80 text-xs leading-relaxed mb-4 hidden md:block">Todo para potenciar la imagen física de tu negocio.</p>
+                        <button onclick="openServiceModal('signs')" class="inline-flex items-center gap-2 bg-white/10 hover:bg-primary border border-white/20 hover:border-transparent text-white font-semibold py-2 px-4 rounded-xl transition-all backdrop-blur-sm w-fit text-xs md:text-sm">
+                            Ver más <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -258,7 +269,7 @@
     </section>
 
     <!-- 3. Productos Destacados (Infinite Gallery) -->
-    <section class="py-16 md:py-24 relative z-10 overflow-hidden" id="destacados">
+    <section class="py-12 md:py-24 relative z-10 overflow-hidden" id="destacados">
         <div class="max-w-7xl mx-auto px-6 mb-12 flex justify-between items-end section-header">
             <div>
                 <h2 class="text-3xl md:text-5xl font-display font-bold mb-4" id="title-destacados"><span class="inline-block origin-center" id="destacados-d">D</span>estacados</h2>
@@ -275,8 +286,516 @@
         </div>
     </section>
 
+    <!-- 3.5 Promociones y Combos -->
+    <section class="py-12 md:py-24 relative z-10 overflow-hidden" id="promociones">
+        <div class="max-w-7xl mx-auto px-6 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 section-header">
+            <div>
+                <h2 class="text-3xl md:text-5xl font-display font-bold mb-4" id="title-promociones">Promociones y combos para tu Negocio</h2>
+                <p class="text-textSec text-lg">Elegí el pack perfecto para impulsar tu marca.</p>
+            </div>
+            
+        </div>
+
+        
+        <div class="w-full max-w-[1400px] mx-auto px-4 md:px-12 pb-12 overflow-visible relative group">
+            <!-- Navigation arrows overlaid -->
+            <button class="absolute left-0 md:left-2 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white border border-black/10 flex items-center justify-center text-dark hover:bg-primary hover:text-white shadow-xl z-20 combos-prev opacity-0 group-hover:opacity-100 transition-opacity duration-300 -ml-4 md:ml-0 hidden md:flex">
+                <i data-lucide="chevron-left" class="w-6 h-6"></i>
+            </button>
+            <button class="absolute right-0 md:right-2 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white border border-black/10 flex items-center justify-center text-dark hover:bg-primary hover:text-white shadow-xl z-20 combos-next opacity-0 group-hover:opacity-100 transition-opacity duration-300 -mr-4 md:mr-0 hidden md:flex">
+                <i data-lucide="chevron-right" class="w-6 h-6"></i>
+            </button>
+
+            <div class="swiper combos-slider !overflow-visible">
+                <div class="swiper-wrapper">
+                    <!-- Combo Emprendedor -->
+                    <div class="swiper-slide h-auto">
+                        <div class="bg-white text-dark shadow-xl shadow-black/5 p-6 md:p-8 rounded-[20px] md:rounded-[24px] md:rounded-[32px] h-full flex flex-col border border-black/5 transition-transform duration-300 hover:-translate-y-2 group">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-4 md:mb-6 transition-transform duration-300 group-hover:scale-110">
+                                <i data-lucide="rocket" class="w-6 h-6 md:w-7 md:h-7"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-display font-bold mb-4 md:mb-6">Combo Emprendedor</h3>
+                            <ul class="flex flex-col gap-3 md:gap-4 mb-6 md:mb-8 flex-1">
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Landing Page</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Logo</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>100 Tarjetas personales</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>1 Taza personalizada</span>
+                                </li>
+                            </ul>
+                            <a href="#contacto" class="w-full py-3 md:py-4 px-6 rounded-xl font-semibold text-center transition-colors duration-300 bg-primary text-white hover:bg-secondary">Consultar</a>
+                        </div>
+                    </div>
+                    <!-- Combo Negocio -->
+                    <div class="swiper-slide h-auto">
+                        <div class="bg-primary text-white shadow-[0_20px_40px_-15px_rgba(255,92,45,0.4)] p-6 md:p-8 rounded-[20px] md:rounded-[24px] md:rounded-[32px] h-full flex flex-col border border-primary/20 transition-transform duration-300 hover:-translate-y-2 group">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center mb-4 md:mb-6 transition-transform duration-300 group-hover:scale-110">
+                                <i data-lucide="store" class="w-6 h-6 md:w-7 md:h-7"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-display font-bold mb-4 md:mb-6">Combo Negocio</h3>
+                            <ul class="flex flex-col gap-3 md:gap-4 mb-6 md:mb-8 flex-1">
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Sitio web</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Cartel para el local</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>100 Tarjetas</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>500 Stickers</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Código QR</span>
+                                </li>
+                            </ul>
+                            <a href="#contacto" class="w-full py-3 md:py-4 px-6 rounded-xl font-semibold text-center transition-colors duration-300 bg-white text-primary hover:bg-dark hover:text-white">Consultar</a>
+                        </div>
+                    </div>
+                    <!-- Combo Tienda -->
+                    <div class="swiper-slide h-auto">
+                        <div class="bg-white text-dark shadow-xl shadow-black/5 p-6 md:p-8 rounded-[20px] md:rounded-[24px] md:rounded-[32px] h-full flex flex-col border border-black/5 transition-transform duration-300 hover:-translate-y-2 group">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-4 md:mb-6 transition-transform duration-300 group-hover:scale-110">
+                                <i data-lucide="shopping-bag" class="w-6 h-6 md:w-7 md:h-7"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-display font-bold mb-4 md:mb-6">Combo Tienda</h3>
+                            <ul class="flex flex-col gap-3 md:gap-4 mb-6 md:mb-8 flex-1">
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Tienda online</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Cartel promocional</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Etiquetas para productos</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Stickers de marca</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Tazas corporativas</span>
+                                </li>
+                            </ul>
+                            <a href="#contacto" class="w-full py-3 md:py-4 px-6 rounded-xl font-semibold text-center transition-colors duration-300 bg-primary text-white hover:bg-secondary">Consultar</a>
+                        </div>
+                    </div>
+                    <!-- Combo Lanzamiento -->
+                    <div class="swiper-slide h-auto">
+                        <div class="bg-primary text-white shadow-[0_20px_40px_-15px_rgba(255,92,45,0.4)] p-6 md:p-8 rounded-[20px] md:rounded-[24px] md:rounded-[32px] h-full flex flex-col border border-primary/20 transition-transform duration-300 hover:-translate-y-2 group">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center mb-4 md:mb-6 transition-transform duration-300 group-hover:scale-110">
+                                <i data-lucide="megaphone" class="w-6 h-6 md:w-7 md:h-7"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-display font-bold mb-4 md:mb-6">Combo Lanzamiento</h3>
+                            <ul class="flex flex-col gap-3 md:gap-4 mb-6 md:mb-8 flex-1">
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Landing Page</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Banner publicitario</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Roll-up</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Remeras personalizadas</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Tazas</span>
+                                </li>
+                            </ul>
+                            <a href="#contacto" class="w-full py-3 md:py-4 px-6 rounded-xl font-semibold text-center transition-colors duration-300 bg-white text-primary hover:bg-dark hover:text-white">Consultar</a>
+                        </div>
+                    </div>
+                    <!-- Combo Empresa -->
+                    <div class="swiper-slide h-auto">
+                        <div class="bg-white text-dark shadow-xl shadow-black/5 p-6 md:p-8 rounded-[20px] md:rounded-[24px] md:rounded-[32px] h-full flex flex-col border border-black/5 transition-transform duration-300 hover:-translate-y-2 group">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-4 md:mb-6 transition-transform duration-300 group-hover:scale-110">
+                                <i data-lucide="briefcase" class="w-6 h-6 md:w-7 md:h-7"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-display font-bold mb-4 md:mb-6">Combo Empresa</h3>
+                            <ul class="flex flex-col gap-3 md:gap-4 mb-6 md:mb-8 flex-1">
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Sitio web corporativo</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Cartel principal</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Tarjetas</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Remeras corporativas</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Tazas corporativas</span>
+                                </li>
+                            </ul>
+                            <a href="#contacto" class="w-full py-3 md:py-4 px-6 rounded-xl font-semibold text-center transition-colors duration-300 bg-primary text-white hover:bg-secondary">Consultar</a>
+                        </div>
+                    </div>
+                    <!-- Combo Branding -->
+                    <div class="swiper-slide h-auto">
+                        <div class="bg-primary text-white shadow-[0_20px_40px_-15px_rgba(255,92,45,0.4)] p-6 md:p-8 rounded-[20px] md:rounded-[24px] md:rounded-[32px] h-full flex flex-col border border-primary/20 transition-transform duration-300 hover:-translate-y-2 group">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center mb-4 md:mb-6 transition-transform duration-300 group-hover:scale-110">
+                                <i data-lucide="palette" class="w-6 h-6 md:w-7 md:h-7"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-display font-bold mb-4 md:mb-6">Combo Branding</h3>
+                            <ul class="flex flex-col gap-3 md:gap-4 mb-6 md:mb-8 flex-1">
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Página web</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Logo</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Tazas</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Remeras</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Mousepads</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Llaveros</span>
+                                </li>
+                            </ul>
+                            <a href="#contacto" class="w-full py-3 md:py-4 px-6 rounded-xl font-semibold text-center transition-colors duration-300 bg-white text-primary hover:bg-dark hover:text-white">Consultar</a>
+                        </div>
+                    </div>
+                    <!-- Combo Publicidad -->
+                    <div class="swiper-slide h-auto">
+                        <div class="bg-white text-dark shadow-xl shadow-black/5 p-6 md:p-8 rounded-[20px] md:rounded-[24px] md:rounded-[32px] h-full flex flex-col border border-black/5 transition-transform duration-300 hover:-translate-y-2 group">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-4 md:mb-6 transition-transform duration-300 group-hover:scale-110">
+                                <i data-lucide="speaker" class="w-6 h-6 md:w-7 md:h-7"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-display font-bold mb-4 md:mb-6">Combo Publicidad</h3>
+                            <ul class="flex flex-col gap-3 md:gap-4 mb-6 md:mb-8 flex-1">
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Landing Page</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Banners</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Carteles promocionales</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Roll-up</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Flyers</span>
+                                </li>
+                            </ul>
+                            <a href="#contacto" class="w-full py-3 md:py-4 px-6 rounded-xl font-semibold text-center transition-colors duration-300 bg-primary text-white hover:bg-secondary">Consultar</a>
+                        </div>
+                    </div>
+                    <!-- Combo Uniforme -->
+                    <div class="swiper-slide h-auto">
+                        <div class="bg-primary text-white shadow-[0_20px_40px_-15px_rgba(255,92,45,0.4)] p-6 md:p-8 rounded-[20px] md:rounded-[24px] md:rounded-[32px] h-full flex flex-col border border-primary/20 transition-transform duration-300 hover:-translate-y-2 group">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center mb-4 md:mb-6 transition-transform duration-300 group-hover:scale-110">
+                                <i data-lucide="shirt" class="w-6 h-6 md:w-7 md:h-7"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-display font-bold mb-4 md:mb-6">Combo Uniforme</h3>
+                            <ul class="flex flex-col gap-3 md:gap-4 mb-6 md:mb-8 flex-1">
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Página web</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Remeras sublimadas</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Buzos</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Gorras</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Credenciales</span>
+                                </li>
+                            </ul>
+                            <a href="#contacto" class="w-full py-3 md:py-4 px-6 rounded-xl font-semibold text-center transition-colors duration-300 bg-white text-primary hover:bg-dark hover:text-white">Consultar</a>
+                        </div>
+                    </div>
+                    <!-- Combo Oficina -->
+                    <div class="swiper-slide h-auto">
+                        <div class="bg-white text-dark shadow-xl shadow-black/5 p-6 md:p-8 rounded-[20px] md:rounded-[24px] md:rounded-[32px] h-full flex flex-col border border-black/5 transition-transform duration-300 hover:-translate-y-2 group">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-4 md:mb-6 transition-transform duration-300 group-hover:scale-110">
+                                <i data-lucide="building-2" class="w-6 h-6 md:w-7 md:h-7"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-display font-bold mb-4 md:mb-6">Combo Oficina</h3>
+                            <ul class="flex flex-col gap-3 md:gap-4 mb-6 md:mb-8 flex-1">
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Página web</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Cartel de oficina</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Placa identificatoria</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Tarjetas</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Tazas corporativas</span>
+                                </li>
+                            </ul>
+                            <a href="#contacto" class="w-full py-3 md:py-4 px-6 rounded-xl font-semibold text-center transition-colors duration-300 bg-primary text-white hover:bg-secondary">Consultar</a>
+                        </div>
+                    </div>
+                    <!-- Combo Ecommerce -->
+                    <div class="swiper-slide h-auto">
+                        <div class="bg-primary text-white shadow-[0_20px_40px_-15px_rgba(255,92,45,0.4)] p-6 md:p-8 rounded-[20px] md:rounded-[24px] md:rounded-[32px] h-full flex flex-col border border-primary/20 transition-transform duration-300 hover:-translate-y-2 group">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center mb-4 md:mb-6 transition-transform duration-300 group-hover:scale-110">
+                                <i data-lucide="shopping-cart" class="w-6 h-6 md:w-7 md:h-7"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-display font-bold mb-4 md:mb-6">Combo Ecommerce</h3>
+                            <ul class="flex flex-col gap-3 md:gap-4 mb-6 md:mb-8 flex-1">
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Tienda online</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Etiquetas para productos</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Packaging personalizado</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Stickers</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Tarjetas de agradecimiento</span>
+                                </li>
+                            </ul>
+                            <a href="#contacto" class="w-full py-3 md:py-4 px-6 rounded-xl font-semibold text-center transition-colors duration-300 bg-white text-primary hover:bg-dark hover:text-white">Consultar</a>
+                        </div>
+                    </div>
+                    <!-- Combo Cafetería -->
+                    <div class="swiper-slide h-auto">
+                        <div class="bg-white text-dark shadow-xl shadow-black/5 p-6 md:p-8 rounded-[20px] md:rounded-[24px] md:rounded-[32px] h-full flex flex-col border border-black/5 transition-transform duration-300 hover:-translate-y-2 group">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-4 md:mb-6 transition-transform duration-300 group-hover:scale-110">
+                                <i data-lucide="coffee" class="w-6 h-6 md:w-7 md:h-7"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-display font-bold mb-4 md:mb-6">Combo Cafetería</h3>
+                            <ul class="flex flex-col gap-3 md:gap-4 mb-6 md:mb-8 flex-1">
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Página web</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Menú QR</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Menú físico</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Individuales sublimados</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Tazas personalizadas</span>
+                                </li>
+                            </ul>
+                            <a href="#contacto" class="w-full py-3 md:py-4 px-6 rounded-xl font-semibold text-center transition-colors duration-300 bg-primary text-white hover:bg-secondary">Consultar</a>
+                        </div>
+                    </div>
+                    <!-- Combo Eventos -->
+                    <div class="swiper-slide h-auto">
+                        <div class="bg-primary text-white shadow-[0_20px_40px_-15px_rgba(255,92,45,0.4)] p-6 md:p-8 rounded-[20px] md:rounded-[24px] md:rounded-[32px] h-full flex flex-col border border-primary/20 transition-transform duration-300 hover:-translate-y-2 group">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center mb-4 md:mb-6 transition-transform duration-300 group-hover:scale-110">
+                                <i data-lucide="party-popper" class="w-6 h-6 md:w-7 md:h-7"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-display font-bold mb-4 md:mb-6">Combo Eventos</h3>
+                            <ul class="flex flex-col gap-3 md:gap-4 mb-6 md:mb-8 flex-1">
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Landing Page del evento</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Roll-up</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Banner</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Remeras</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Credenciales</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Tazas de recuerdo</span>
+                                </li>
+                            </ul>
+                            <a href="#contacto" class="w-full py-3 md:py-4 px-6 rounded-xl font-semibold text-center transition-colors duration-300 bg-white text-primary hover:bg-dark hover:text-white">Consultar</a>
+                        </div>
+                    </div>
+                    <!-- Combo Identidad -->
+                    <div class="swiper-slide h-auto">
+                        <div class="bg-white text-dark shadow-xl shadow-black/5 p-6 md:p-8 rounded-[20px] md:rounded-[24px] md:rounded-[32px] h-full flex flex-col border border-black/5 transition-transform duration-300 hover:-translate-y-2 group">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-4 md:mb-6 transition-transform duration-300 group-hover:scale-110">
+                                <i data-lucide="fingerprint" class="w-6 h-6 md:w-7 md:h-7"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-display font-bold mb-4 md:mb-6">Combo Identidad</h3>
+                            <ul class="flex flex-col gap-3 md:gap-4 mb-6 md:mb-8 flex-1">
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Página web</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Logo</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Tarjetas</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Cartel</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Tazas</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Remeras</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-textSec text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"></i>
+                                    <span>Stickers</span>
+                                </li>
+                            </ul>
+                            <a href="#contacto" class="w-full py-3 md:py-4 px-6 rounded-xl font-semibold text-center transition-colors duration-300 bg-primary text-white hover:bg-secondary">Consultar</a>
+                        </div>
+                    </div>
+                    <!-- Combo Premium -->
+                    <div class="swiper-slide h-auto">
+                        <div class="bg-primary text-white shadow-[0_20px_40px_-15px_rgba(255,92,45,0.4)] p-6 md:p-8 rounded-[20px] md:rounded-[24px] md:rounded-[32px] h-full flex flex-col border border-primary/20 transition-transform duration-300 hover:-translate-y-2 group">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center mb-4 md:mb-6 transition-transform duration-300 group-hover:scale-110">
+                                <i data-lucide="star" class="w-6 h-6 md:w-7 md:h-7"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-display font-bold mb-4 md:mb-6">Combo Premium</h3>
+                            <ul class="flex flex-col gap-3 md:gap-4 mb-6 md:mb-8 flex-1">
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Sitio web profesional</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Dominio y hosting</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Logo</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Cartel principal</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Tarjetas</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Stickers</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Remeras</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Tazas</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Mousepads</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-white/90 text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-white flex-shrink-0 mt-0.5"></i>
+                                    <span>Llaveros</span>
+                                </li>
+                            </ul>
+                            <a href="#contacto" class="w-full py-3 md:py-4 px-6 rounded-xl font-semibold text-center transition-colors duration-300 bg-white text-primary hover:bg-dark hover:text-white">Consultar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
     <!-- 4. Catálogo Completo (Glass Tabs) -->
-    <section class="py-16 md:py-24 relative z-10" id="productos">
+    <section class="py-12 md:py-24 relative z-10" id="productos">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
                 <h2 class="text-3xl md:text-5xl font-display font-bold mb-6 opacity-0 translate-y-8" id="title-catalogo">Catálogo Complet<span id="catalogo-o" class="inline-block">o</span></h2>
@@ -477,7 +996,7 @@
     </div>
 
     <!-- 5. Metodología de Compra (Interactive Timeline Mobile First) -->
-    <section class="py-16 md:py-24 relative z-10" id="metodologia">
+    <section class="py-12 md:py-24 relative z-10" id="metodologia">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <p class="text-primary text-xs font-semibold uppercase tracking-[0.35em] mb-4">¿Cómo trabajamos?</p>
             <h2 class="text-3xl md:text-5xl font-display font-bold mb-4 min-h-[1.2em]" id="title-metodologia">Metodología de trabajo</h2>
@@ -552,7 +1071,7 @@
     </section>
 
     <!-- 7. Testimonios (Glass Slider) -->
-    <section class="py-16 md:py-24 relative z-10 overflow-hidden">
+    <section class="py-12 md:py-24 relative z-10 overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 mb-16 text-center">
             <h2 class="text-3xl md:text-5xl font-display font-bold mb-4">Lo que dicen de nosotros</h2>
             <p class="text-textSec text-lg max-w-2xl mx-auto">Historias reales de clientes que confiaron en FARO para llevar su marca y sus ideas a productos físicos.</p>
@@ -704,7 +1223,7 @@
     </section>
 
     <!-- 8.5 Ubicación y Contacto -->
-    <section class="py-16 md:py-24 relative z-20 bg-[#F9F3E9] backdrop-blur-lg border-y border-black/5" id="contacto">
+    <section class="py-12 md:py-24 relative z-20 bg-[#F9F3E9] backdrop-blur-lg border-y border-black/5" id="contacto">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-5xl font-display font-bold mb-4">Ubicación y Contacto</h2>
@@ -945,6 +1464,54 @@
                     <button id="modal-add-btn" class="w-full bg-primary text-white py-4 rounded-xl font-semibold text-base hover:bg-secondary transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(255,92,45,0.2)]">
                         <i data-lucide="shopping-bag" class="w-5 h-5"></i> Agregar al Carrito
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Detail Modal (Hidden by default) -->
+    <div id="service-modal" class="fixed inset-0 z-[100] flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300">
+        <!-- Modal Backdrop -->
+        <div id="service-modal-backdrop" class="absolute inset-0 bg-dark/40 backdrop-blur-md cursor-pointer"></div>
+        
+        <!-- Modal Box -->
+        <div id="service-modal-box" class="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-tertiary border border-black/10 rounded-[32px] glass-panel flex flex-col z-10 transform scale-95 transition-all duration-300 hide-scroll mx-4">
+            <!-- Close Button -->
+            <button id="service-modal-close" class="absolute top-4 right-4 text-white hover:text-white/80 p-2 bg-black/20 backdrop-blur-md hover:bg-black/40 rounded-full z-20 transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            
+            <!-- Infinite Gallery Header (Swiper) -->
+            <div class="w-full h-64 md:h-80 bg-dark relative overflow-hidden flex-shrink-0">
+                <div class="swiper service-gallery-slider h-full w-full">
+                    <div class="swiper-wrapper" id="service-modal-gallery">
+                        <!-- Dynamic slides will be injected here -->
+                    </div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-tertiary via-transparent to-transparent z-10 pointer-events-none"></div>
+            </div>
+            
+            <!-- Content -->
+            <div class="p-6 md:p-10 flex flex-col gap-6 -mt-8 relative z-20">
+                <div>
+                    <h3 id="service-modal-title" class="text-3xl md:text-4xl font-display font-bold text-dark leading-tight mb-3"></h3>
+                    <p id="service-modal-desc" class="text-textSec text-base leading-relaxed mb-6 max-w-3xl"></p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                    <div>
+                        <h4 class="text-sm font-semibold text-primary uppercase tracking-wider mb-4">Servicios Incluidos</h4>
+                        <ul id="service-modal-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-dark font-medium">
+                            <!-- Dynamic list items will be injected here -->
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white/60 p-6 rounded-2xl border border-black/5 flex flex-col justify-center items-center text-center h-full">
+                        <p class="text-sm text-textSec mb-4">¿Listo para empezar tu proyecto?</p>
+                        <a href="#contacto" onclick="closeServiceModal()" id="service-modal-cta" class="w-full bg-primary text-white py-4 px-6 rounded-xl font-semibold text-base hover:bg-secondary transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(255,92,45,0.2)] hover:scale-105 transform">
+                            <i data-lucide="message-square" class="w-5 h-5"></i> Cotizar Proyecto
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

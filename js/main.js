@@ -1,5 +1,56 @@
 // FARO Main JS Initializer
 document.addEventListener('DOMContentLoaded', () => {
+    // Cinematic Preloader Logic
+    const preloader = document.getElementById('cinematic-preloader');
+    
+    if (preloader) {
+        // Force a minimum display time of 2.2 seconds for the cinematic effect
+        const minTime = 2200;
+        const startTime = Date.now();
+        
+        window.addEventListener('load', () => {
+            const elapsedTime = Date.now() - startTime;
+            const remainingTime = Math.max(0, minTime - elapsedTime);
+            
+            setTimeout(() => {
+                preloader.classList.add('preloader-hidden');
+                document.body.classList.remove('no-scroll-preloader');
+            }, remainingTime);
+        });
+    }
+
+    // Mobile Menu Logic
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+    const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    let isMobileMenuOpen = false;
+
+    if(mobileMenuBtn && mobileMenuOverlay) {
+        function toggleMobileMenu() {
+            isMobileMenuOpen = !isMobileMenuOpen;
+            if (isMobileMenuOpen) {
+                mobileMenuOverlay.classList.remove('translate-x-full');
+                mobileMenuIcon.setAttribute('data-lucide', 'x');
+                lucide.createIcons();
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            } else {
+                mobileMenuOverlay.classList.add('translate-x-full');
+                mobileMenuIcon.setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+                document.body.style.overflow = '';
+            }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if(isMobileMenuOpen) toggleMobileMenu();
+            });
+        });
+    }
+
     // 1. Dynamic Rendering of Products
     renderFeaturedSlider();
     renderCatalogGrid();
@@ -255,13 +306,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Combos Slider
+    const combosSwiper = new Swiper('.combos-slider', {
+        slidesPerView: 1.2,
+        spaceBetween: 16,
+        centeredSlides: true,
+        loop: true,
+        navigation: {
+            nextEl: '.combos-next',
+            prevEl: '.combos-prev',
+        },
+        breakpoints: {
+            640: { slidesPerView: 2.5, spaceBetween: 24 },
+            1024: { slidesPerView: 3.5, spaceBetween: 32 }
+        }
+    });
+
     // Testimonials Slider (Faster and linear loop)
     const testimonialsSwiper = new Swiper('.testimonial-slider', {
         slidesPerView: 1,
         spaceBetween: 30,
         loop: true,
         speed: 5000,
-        centeredSlides: true,
+        freeMode: true,
         autoplay: {
             delay: 0,
             disableOnInteraction: false,
@@ -682,3 +749,118 @@ function renderCatalogGrid() {
 
     if (window.lucide) window.lucide.createIcons();
 }
+
+// --- Service Modal Logic ---
+window.SERVICES_DATA = {
+    web: {
+        title: "Diseño y Desarrollo Web",
+        desc: "Creamos sitios web modernos, rápidos y optimizados para potenciar tu negocio.",
+        services: [
+            "Landing Pages", "Sitios Institucionales", "Tiendas Online", 
+            "Catálogos Digitales", "Menús QR", "Aplicaciones Web", 
+            "Hosting y Dominio", "Mantenimiento Web", "SEO", "Optimización de Velocidad"
+        ],
+        images: ["assets/images/steps/paso1.webp", "assets/images/steps/paso2.webp", "assets/images/steps/paso3.webp"]
+    },
+    graphic: {
+        title: "Diseño Gráfico e Identidad",
+        desc: "Diseñamos la imagen visual de tu marca para destacar frente a la competencia.",
+        services: [
+            "Diseño de Logo", "Branding", "Tarjetas Personales", "Flyers",
+            "Banners", "Folletos", "Packaging", "Etiquetas", "Stickers", "Papelería Corporativa"
+        ],
+        images: ["assets/images/steps/paso2.webp", "assets/images/steps/paso3.webp", "assets/images/steps/paso4.webp"]
+    },
+    merch: {
+        title: "Sublimación y Merchandising",
+        desc: "Productos personalizados para empresas, comercios y emprendedores.",
+        services: [
+            "Remeras", "Buzos", "Tazas", "Botellas", "Mousepads",
+            "Llaveros", "Gorras", "Rompecabezas", "Almohadones", "Cuadros"
+        ],
+        images: ["assets/images/steps/paso1.webp", "assets/images/steps/paso3.webp", "assets/images/steps/paso4.webp"]
+    },
+    signs: {
+        title: "Cartelería Comercial",
+        desc: "Todo lo necesario para potenciar la imagen física de tu negocio.",
+        services: [
+            "Carteles", "Roll Up", "Banners", "Señalética",
+            "Carteles Promocionales", "Placas", "Individuales", "Menús Físicos"
+        ],
+        images: ["assets/images/steps/paso4.webp", "assets/images/steps/paso2.webp", "assets/images/steps/paso1.webp"]
+    }
+};
+
+let serviceSwiperInstance = null;
+
+window.openServiceModal = function(serviceId) {
+    const data = window.SERVICES_DATA[serviceId];
+    if (!data) return;
+
+    // Populate Data
+    document.getElementById('service-modal-title').textContent = data.title;
+    document.getElementById('service-modal-desc').textContent = data.desc;
+    
+    const listContainer = document.getElementById('service-modal-list');
+    listContainer.innerHTML = data.services.map(s => `<li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-primary"></i> ${s}</li>`).join('');
+    
+    const galleryContainer = document.getElementById('service-modal-gallery');
+    galleryContainer.innerHTML = data.images.map(img => `
+        <div class="swiper-slide w-full h-full">
+            <img src="${img}" class="w-full h-full object-cover opacity-80" alt="Service Image">
+        </div>
+    `).join('');
+
+    if (window.lucide) window.lucide.createIcons();
+
+    // Init or Update Swiper
+    if (serviceSwiperInstance) {
+        serviceSwiperInstance.destroy(true, true);
+    }
+    serviceSwiperInstance = new Swiper('.service-gallery-slider', {
+        slidesPerView: 1,
+        loop: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        effect: 'fade',
+        fadeEffect: {
+            crossFade: true
+        }
+    });
+
+    // Show Modal
+    const modal = document.getElementById('service-modal');
+    const modalBox = document.getElementById('service-modal-box');
+    modal.classList.remove('pointer-events-none', 'opacity-0');
+    if (modalBox) {
+        modalBox.classList.remove('scale-95');
+        modalBox.classList.add('scale-100');
+    }
+    document.body.style.overflow = 'hidden'; // lock scroll
+};
+
+window.closeServiceModal = function() {
+    const modal = document.getElementById('service-modal');
+    const modalBox = document.getElementById('service-modal-box');
+    modal.classList.add('pointer-events-none', 'opacity-0');
+    if (modalBox) {
+        modalBox.classList.remove('scale-100');
+        modalBox.classList.add('scale-95');
+    }
+    document.body.style.overflow = ''; // restore scroll
+    
+    if (serviceSwiperInstance) {
+        serviceSwiperInstance.autoplay.stop();
+    }
+};
+
+// Event Listeners for closing modal
+document.addEventListener('DOMContentLoaded', () => {
+    const closeBtn = document.getElementById('service-modal-close');
+    const backdrop = document.getElementById('service-modal-backdrop');
+    
+    if (closeBtn) closeBtn.addEventListener('click', closeServiceModal);
+    if (backdrop) backdrop.addEventListener('click', closeServiceModal);
+});
