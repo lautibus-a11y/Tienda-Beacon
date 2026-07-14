@@ -1,0 +1,19 @@
+{
+    "name": "Faro | Sublimación & Diseño",
+    "short_name": "Faro",
+    "icons": [
+        {
+            "src": "android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#FF5C2D",
+    "background_color": "#F9F3E9",
+    "display": "standalone"
+}

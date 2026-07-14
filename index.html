@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="FARO - Sublimación, diseño gráfico y estampado personalizado en CABA. Remeras full print, tazas, vinilos y papelería corporativa premium.">
-    <title>Faro | Sublimación & Diseño</title>
+    <title>Faro | Sublimación, Diseño y Merchandising en Argentina</title>
+    <meta name="description" content="Faro - Soluciones integrales en sublimación textil, diseño gráfico y estampado personalizado. Envíos a toda Argentina y CABA. Remeras, tazas, vinilos y más.">
+    
+    <!-- SEO / Open Graph -->
+    <link rel="canonical" href="https://faro-desing.com/" />
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://faro-desing.com/">
+    <meta property="og:title" content="Faro | Sublimación, Diseño y Merchandising">
+    <meta property="og:description" content="Faro - Soluciones integrales en sublimación textil, diseño gráfico y estampado personalizado. Envíos a toda Argentina.">
+    <meta property="og:image" content="https://faro-desing.com/apple-touch-icon.png">
+    <meta property="og:locale" content="es_AR">
+    <meta name="twitter:card" content="summary_large_image">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,19 +60,41 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <!-- Schema Markup LocalBusiness -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Faro Sublimación & Diseño",
+      "image": "https://faro-desing.com/apple-touch-icon.png",
+      "@id": "https://faro-desing.com/",
+      "url": "https://faro-desing.com/",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "CABA",
+        "addressCountry": "AR"
+      }
+    }
+    </script>
 </head>
 <body class="antialiased bg-[#F9F3E9] selection:bg-primary selection:text-white overflow-x-hidden no-scroll-preloader">
 
     <!-- Cinematic Reveal Preloader -->
-    <div id="cinematic-preloader" class="fixed inset-0 z-[9999] bg-white flex items-center justify-center transition-all duration-1000 ease-in-out">
-        <!-- Ambient Orange Glow -->
-        <div class="absolute inset-0 bg-primary/5 backdrop-blur-3xl animate-pulse-slow"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/20 rounded-full blur-[80px] animate-pulse-glow"></div>
+    <div id="cinematic-preloader" class="fixed inset-0 z-[9999] bg-white flex items-center justify-center transition-all duration-1000 ease-in-out overflow-hidden">
+        
+        <!-- Ambient Orange Glow (Lighthouse effect) -->
+        <div class="absolute inset-0 bg-primary/5 backdrop-blur-3xl animate-pulse-slow pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 md:w-80 h-56 md:h-80 bg-primary/30 rounded-full blur-[60px] animate-lighthouse-flicker pointer-events-none"></div>
         
         <!-- Logo -->
-        <img src="assets/images/logo-cabecera.png" alt="Faro Preloader" class="relative z-10 h-20 md:h-28 w-auto object-contain cinematic-logo drop-shadow-2xl">
+        <img src="assets/images/logo-cabecera.png" alt="Faro Preloader" class="relative z-10 h-24 md:h-32 w-auto object-contain animate-logo-approach drop-shadow-2xl">
+        
     </div>
 
     <!-- Aurora Background -->
@@ -196,7 +228,7 @@
                 <!-- Card 1: Web -->
                 <div class="bento-item bento-span-2 bento-span-2-row bg-black/40 backdrop-blur-sm border border-white/10 text-white p-6 md:p-8 rounded-[20px] md:rounded-[28px] flex flex-col justify-between hover-target spotlight-card relative overflow-hidden group">
                     <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
-                        <img src="assets/images/servicios-imagenes-para-bento/disenio-desarrollo.web.jpeg" alt="Web" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
+                        <img src="assets/images/servicios-imagenes-para-bento/Pagina%20web%20bento%20grid.webp" alt="Servicio de diseño y desarrollo web corporativo en Argentina" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                     </div>
                     <div class="relative z-10 w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-6 text-white group-hover:bg-primary transition-colors duration-300">
@@ -214,7 +246,7 @@
                 <!-- Card 2: Graphic -->
                 <div class="bento-item bento-span-2 bg-black/40 backdrop-blur-sm border border-white/10 text-white p-6 md:p-8 rounded-[20px] md:rounded-[24px] flex flex-col justify-between hover-target spotlight-card relative overflow-hidden group">
                     <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
-                        <img src="assets/images/servicios-imagenes-para-bento/Disenio-grafico.jpeg" alt="Graphic" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
+                        <img src="assets/images/servicios-imagenes-para-bento/Disenio-grafico.webp" alt="Servicio de diseño gráfico e identidad de marca" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                     </div>
                     <div class="relative z-10 w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-4 text-white group-hover:bg-primary transition-colors duration-300">
@@ -232,7 +264,7 @@
                 <!-- Card 3: Merch -->
                 <div class="bento-item bg-black/40 backdrop-blur-sm border border-white/10 text-white p-5 md:p-6 rounded-[20px] md:rounded-[24px] flex flex-col justify-between hover-target spotlight-card relative overflow-hidden group">
                     <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
-                        <img src="assets/images/servicios-imagenes-para-bento/Sublimacion.jpeg" alt="Merch" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
+                        <img src="assets/images/servicios-imagenes-para-bento/Sublimacion.webp" alt="Servicio de sublimación textil y merchandising personalizado" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                     </div>
                     <div class="relative z-10 w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-4 text-white group-hover:bg-primary transition-colors duration-300">
@@ -250,7 +282,7 @@
                 <!-- Card 4: Signs -->
                 <div class="bento-item bg-black/40 backdrop-blur-sm border border-white/10 text-white p-5 md:p-6 rounded-[20px] md:rounded-[24px] flex flex-col justify-between hover-target spotlight-card relative overflow-hidden group">
                     <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
-                        <img src="assets/images/servicios-imagenes-para-bento/carteleria.png" alt="Signs" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
+                        <img src="assets/images/servicios-imagenes-para-bento/Carteleria---.webp" alt="Cartelería comercial y señalética para negocios" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                     </div>
                     <div class="relative z-10 w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-4 text-white group-hover:bg-primary transition-colors duration-300">
